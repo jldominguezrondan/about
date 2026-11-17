@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>José Luis Domínguez Rondán</title>
+  <meta name="description" content="José Luis Domínguez Rondán — Full Stack Developer · Machine Learning & Data Science.">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #1a1d23;
+      --muted: #5c6370;
+      --border: #e3e6eb;
+      --accent: #2563eb;
+      --accent-soft: #e8efff;
+      --accent-text: #ffffff;
+      --danger: #d92d20;
+      --shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 4px 16px rgba(16, 24, 40, .06);
+      --radius: 14px;
+      --dot: rgba(37, 99, 235, .10);
+      --grad: linear-gradient(120deg, #1d4ed8 0%, #4f46e5 45%, #7c3aed 75%, #db2777 100%);
+      --grad-text: linear-gradient(120deg, #2563eb, #7c3aed);
+    }
+    :root[data-theme="dark"] {
+        --dot: rgba(120, 150, 255, .10);
+        --bg: #12151c;
+        --surface: #171a21;
+        --text: #e8eaee;
+        --muted: #9aa1ad;
+        --border: #272b35;
+        --accent: #5b8cff;
+        --accent-soft: #1c2640;
+        --accent-text: #0b1020;
+        --danger: #ff6b5e;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
+        --grad-text: linear-gradient(120deg, #7aa2ff, #c084fc);
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(var(--dot) 1.2px, transparent 1.2px);
+      background-size: 22px 22px;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+    a { color: var(--accent); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* ---------- Barra superior / idioma ---------- */
+    .topbar { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding-top: 20px; }
+    .seg { display: inline-flex; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); border-radius: 10px; padding: 3px; backdrop-filter: blur(6px); }
+    .seg button {
+      border: 0; background: transparent; color: rgba(255,255,255,.85);
+      padding: 5px 11px; border-radius: 7px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .seg button[aria-pressed="true"] { background: #fff; color: #1d4ed8; }
+    .theme-btn {
+      width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-size: 16px;
+      background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(6px);
+    }
+
+    /* ---------- Cabecera ---------- */
+    header.hero {
+      position: relative; overflow: hidden; isolation: isolate;
+      background: var(--grad); color: #fff;
+    }
+    .hero-inner { position: relative; padding: 36px 0 96px; }
+    .hero-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .55; animation: float 14s ease-in-out infinite alternate; }
+    .blob.b1 { width: 340px; height: 340px; background: #22d3ee; top: -120px; left: -80px; }
+    .blob.b2 { width: 300px; height: 300px; background: #f472b6; bottom: -140px; right: 10%; animation-delay: -5s; }
+    .blob.b3 { width: 220px; height: 220px; background: #a78bfa; top: 30%; left: 45%; animation-delay: -9s; opacity: .4; }
+    @keyframes float { to { transform: translate(40px, 30px) scale(1.12); } }
+    .net { position: absolute; right: -40px; top: 10px; width: min(620px, 70%); height: auto; opacity: .55; }
+    .net line { stroke: #fff; stroke-opacity: .35; stroke-width: 1.2; }
+    .net circle { fill: #fff; }
+    .net .pulse { animation: pulse 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .net .pulse:nth-of-type(2n) { animation-delay: -1.5s; }
+    @keyframes pulse { 50% { transform: scale(1.8); opacity: .5; } }
+    .hero-wave { position: absolute; left: 0; bottom: -1px; width: 100%; height: 70px; fill: var(--bg); }
+    .hero .avatar { background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.7); box-shadow: 0 8px 24px rgba(0,0,0,.2); backdrop-filter: blur(6px); }
+    .hero .role { color: #c7f9ff; }
+    .hero .degree { background: rgba(255,255,255,.16); color: #fff; border: 1px solid rgba(255,255,255,.25); }
+    .hero .meta { color: rgba(255,255,255,.85); }
+    .hero .btn { background: #fff; color: #1d4ed8; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+    .hero .btn.ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.55); box-shadow: none; }
+    .hero-top { display: flex; align-items: center; gap: 20px; }
+    .avatar {
+      flex: none;
+      width: 72px; height: 72px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      color: #fff; font-weight: 700; font-size: 26px; letter-spacing: .5px;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 5vw, 40px); line-height: 1.15; letter-spacing: -.02em; }
+    .role { margin: 6px 0 0; font-size: clamp(17px, 2.6vw, 20px); color: var(--accent); font-weight: 600; }
+    .degrees { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .degree {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 11px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--text);
+      font-size: 14px; font-weight: 600;
+    }
+    .degree::before { content: "🎓"; font-size: 13px; }
+    .meta { margin: 20px 0 0; color: var(--muted); }
+    .meta span { white-space: nowrap; }
+    .actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 10px; border: 1px solid transparent;
+      font: inherit; font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer;
+      background: var(--accent); color: var(--accent-text);
+      transition: transform .1s ease, opacity .15s ease;
+    }
+    .btn:hover { opacity: .9; }
+    .btn:active { transform: translateY(1px); }
+    .btn.ghost { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn svg { width: 18px; height: 18px; }
+
+    /* ---------- Tarjetas ---------- */
+    section.card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 24px;
+      position: relative; overflow: hidden;
+    }
+    section.card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--grad); }
+    h2 { margin: 0 0 16px; font-size: 20px; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px; }
+    h2 .ico {
+      width: 34px; height: 34px; border-radius: 10px; flex: none;
+      display: grid; place-items: center; background: var(--grad); color: #fff;
+    }
+    h2 .ico svg { width: 18px; height: 18px; }
+    h3 { margin: 24px 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+    p { margin: 0 0 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 4px; }
+    .stat { background: var(--accent-soft); border-radius: 12px; padding: 14px 12px; text-align: center; }
+    .stat strong {
+      display: block; font-size: 26px; line-height: 1.1; font-weight: 800;
+      background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .stat span { font-size: 13px; color: var(--muted); }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+    .tags li { padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); font-size: 14px; transition: transform .15s ease; }
+    .tags li:hover { transform: translateY(-2px); }
+    .tags li:nth-child(4n+1) { background: rgba(37, 99, 235, .10); border-color: rgba(37, 99, 235, .25); }
+    .tags li:nth-child(4n+2) { background: rgba(124, 58, 237, .10); border-color: rgba(124, 58, 237, .25); }
+    .tags li:nth-child(4n+3) { background: rgba(6, 182, 212, .10); border-color: rgba(6, 182, 212, .28); }
+    .tags li:nth-child(4n)   { background: rgba(219, 39, 119, .09); border-color: rgba(219, 39, 119, .22); }
+
+    .roles { list-style: none; margin: 0; padding: 0; }
+    .roles li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .roles li:last-child { border-bottom: 0; }
+    .roles small { color: var(--muted); white-space: nowrap; }
+
+    /* ---------- Tareas ---------- */
+    .todo-form { display: flex; gap: 10px; }
+    .todo-form input {
+      flex: 1; min-width: 0;
+      padding: 11px 14px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--bg); color: var(--text);
+      font: inherit;
+    }
+    .todo-form input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
+
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 18px 0 8px; }
+    .filters { display: inline-flex; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+    .filters button {
+      border: 0; background: transparent; color: var(--muted);
+      padding: 6px 12px; border-radius: 7px; font: inherit; font-size: 14px; cursor: pointer;
+    }
+    .filters button[aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); font-weight: 600; }
+    .count { color: var(--muted); font-size: 14px; }
+
+    .todo-list { list-style: none; margin: 0; padding: 0; }
+    .todo {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 4px; border-bottom: 1px solid var(--border);
+    }
+    .todo:last-child { border-bottom: 0; }
+    .todo input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex: none; cursor: pointer; }
+    .todo .text { flex: 1; min-width: 0; overflow-wrap: anywhere; cursor: text; }
+    .todo.done .text { color: var(--muted); text-decoration: line-through; }
+    .todo .edit {
+      flex: 1; min-width: 0; font: inherit; color: var(--text);
+      padding: 4px 8px; border: 1px solid var(--accent); border-radius: 6px; background: var(--bg);
+    }
+    .icon-btn {
+      flex: none; border: 0; background: transparent; color: var(--muted);
+      width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
+      display: grid; place-items: center; opacity: .55;
+    }
+    .todo:hover .icon-btn, .icon-btn:focus-visible { opacity: 1; }
+    .icon-btn:hover { color: var(--danger); background: var(--bg); }
+    .icon-btn svg { width: 18px; height: 18px; }
+
+    .empty { text-align: center; color: var(--muted); padding: 24px 0 8px; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
+    .link-btn { border: 0; background: none; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer; padding: 4px; }
+    .link-btn:hover { color: var(--danger); }
+    .link-btn[hidden] { display: none; }
+    .note { font-size: 13px; color: var(--muted); }
+
+    footer.site { text-align: center; color: var(--muted); font-size: 14px; padding: 16px 0 48px; }
+
+    @media (max-width: 520px) {
+      .hero-inner { padding: 20px 0 72px; }
+      .net { width: 120%; right: -30%; opacity: .3; }
+      .hero-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+      section.card { padding: 20px; }
+      .stats { gap: 8px; }
+      .stat strong { font-size: 20px; }
+      .roles li { flex-direction: column; gap: 0; }
+      .todo .icon-btn { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem('miweb.theme') === 'dark' ? 'dark' : 'light'; }
+    catch (e) { document.documentElement.dataset.theme = 'light'; }
+  </script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+      <svg class="net" viewBox="0 0 600 400">
+        <line x1="60" y1="80" x2="160" y2="40"/><line x1="160" y1="40" x2="250" y2="120"/>
+        <line x1="60" y1="80" x2="140" y2="180"/><line x1="140" y1="180" x2="250" y2="120"/>
+        <line x1="250" y1="120" x2="330" y2="60"/><line x1="330" y1="60" x2="480" y2="60"/>
+        <line x1="250" y1="120" x2="420" y2="150"/><line x1="330" y1="60" x2="420" y2="150"/>
+        <line x1="480" y1="60" x2="420" y2="150"/><line x1="420" y1="150" x2="540" y2="220"/>
+        <line x1="140" y1="180" x2="300" y2="240"/><line x1="250" y1="120" x2="300" y2="240"/>
+        <line x1="300" y1="240" x2="420" y2="150"/><line x1="300" y1="240" x2="200" y2="300"/>
+        <line x1="300" y1="240" x2="400" y2="320"/><line x1="400" y1="320" x2="540" y2="220"/>
+        <line x1="400" y1="320" x2="520" y2="340"/><line x1="540" y1="220" x2="520" y2="340"/>
+        <circle cx="60" cy="80" r="4"/><circle class="pulse" cx="160" cy="40" r="5"/>
+        <circle cx="250" cy="120" r="7"/><circle cx="140" cy="180" r="4"/>
+        <circle class="pulse" cx="330" cy="60" r="5"/><circle cx="420" cy="150" r="7"/>
+        <circle cx="300" cy="240" r="6"/><circle class="pulse" cx="200" cy="300" r="4"/>
+        <circle cx="480" cy="60" r="4"/><circle class="pulse" cx="540" cy="220" r="5"/>
+        <circle cx="400" cy="320" r="5"/><circle cx="520" cy="340" r="4"/>
+      </svg>
+    </div>
+    <div class="wrap">
+    <div class="topbar">
+      <button type="button" class="theme-btn" id="theme-btn"></button>
+      <div class="seg" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" aria-pressed="true" lang="es">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-top">
+        <div class="avatar" aria-hidden="true">JL</div>
+        <div>
+          <h1>José Luis Domínguez Rondán</h1>
+          <p class="role" data-i18n="role"></p>
+          <p class="degrees">
+            <span class="degree" data-i18n="deg1"></span>
+            <span class="degree" data-i18n="deg2"></span>
+          </p>
+        </div>
+      </div>
+      <p class="meta">
+        <span data-i18n-html="current" style="white-space:normal"></span><br>
+        <span data-i18n="location"></span>
+      </p>
+      <div class="actions">
+        <a class="btn" href="https://www.linkedin.com/in/joseluisdominguezrondan/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn ghost" id="contact-btn" href="mailto:joseluis.dominguezrondan@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span data-i18n="ctaContact"></span>
+        </a>
+      </div>
+    </div>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,48 C240,88 480,8 720,32 C960,56 1200,88 1440,36 L1440,80 L0,80 Z"/>
+    </svg>
+  </header>
+
+  <div class="wrap">
+    <main>
+      <section class="card" id="sobre-mi" aria-labelledby="sobre-mi-title">
+        <h2><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span id="sobre-mi-title" data-i18n="aboutTitle"></span></h2>
+        <p><strong data-i18n="aboutLead"></strong></p>
+        <p data-i18n="aboutP1"></p>
+        <p data-i18n="aboutP2"></p>
+
+        <div class="stats">
+          <div class="stat"><strong>25+</strong><span data-i18n="stat1"></span></div>
+          <div class="stat"><strong>50+</strong><span data-i18n="stat2"></span></div>
+          <div class="stat"><strong>ML</strong><span data-i18n="stat3"></span></div>
+        </div>
+
+        <h3 data-i18n="techTitle"></h3>
+        <ul class="tags">
+          <li>Python</li><li>R</li><li>Machine Learning</li><li>PHP</li><li>MySQL</li>
+          <li>Linux / Apache</li><li>.NET · C#</li><li>Microsoft Azure</li>
+          <li>Dynamics 365 BC (AL)</li><li>SPA · PWA</li><li>Responsive Design</li>
+        </ul>
+
+        <h3 data-i18n="nowTitle"></h3>
+        <ul class="roles">
+          <li><span data-i18n="now1"></span><small data-i18n="since2001"></small></li>
+          <li><span>Senior Developer · Bravent</span><small data-i18n="since2021"></small></li>
+        </ul>
+
+        <h3 data-i18n="eduTitle"></h3>
+        <ul class="roles">
+          <li><span><strong data-i18n="deg1"></strong> · <span data-i18n="uca"></span></span><small>1997 – 2001</small></li>
+          <li><span><strong data-i18n="deg2"></strong> · <span data-i18n="eqf"></span></span><small>2022</small></li>
+          <li><span><span data-i18n="master"></span> · campusMVP</span><small>2024</small></li>
+        </ul>
+
+        <h3 data-i18n="certTitle"></h3>
+        <ul class="tags">
+          <li>Microsoft Certified: Azure AI Fundamentals</li>
+          <li>Microsoft Certified: Azure Fundamentals</li>
+        </ul>
+      </section>
+
+      <section class="card" id="tareas" aria-labelledby="tareas-title">
+        <h2><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span><span id="tareas-title" data-i18n="tasksTitle"></span></h2>
+        <form class="todo-form" id="todo-form" autocomplete="off">
+          <label for="todo-input" class="sr-only" data-i18n="newTask"></label>
+          <input id="todo-input" type="text" data-i18n-placeholder="placeholder" maxlength="200" required>
+          <button class="btn" type="submit" data-i18n="add"></button>
+        </form>
+
+        <div class="toolbar">
+          <div class="filters" role="group" data-i18n-aria="filterLabel">
+            <button type="button" data-filter="all" aria-pressed="true" data-i18n="fAll"></button>
+            <button type="button" data-filter="active" aria-pressed="false" data-i18n="fActive"></button>
+            <button type="button" data-filter="done" aria-pressed="false" data-i18n="fDone"></button>
+          </div>
+          <span class="count" id="count" aria-live="polite"></span>
+        </div>
+
+        <ul class="todo-list" id="todo-list"></ul>
+        <p class="empty" id="empty" hidden></p>
+
+        <div class="footer-row">
+          <span class="note" id="note"></span>
+          <button type="button" class="link-btn" id="clear-done" hidden data-i18n="clearDone"></button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site">© <span id="year"></span> José Luis Domínguez Rondán</footer>
+  </div>
+
+  <script>
+    (function () {
+      /* ---------- Traducciones ---------- */
+      const I18N = {
+        es: {
+          role: 'Full Stack Developer · Machine Learning y Ciencia de Datos',
+          current: 'Analista de Proyectos de Software en <strong>El Puerto Global</strong> y Senior Developer en <strong>Bravent</strong>',
+          location: '📍 El Puerto de Santa María, Cádiz (España)',
+          ctaContact: 'Contactar',
+          mailSubject: 'Contacto desde tu web',
+          aboutTitle: 'Sobre mí',
+          aboutLead: 'Desarrollo aplicaciones web que no solo funcionan: aprenden de los datos.',
+          aboutP1: 'Soy Full Stack Developer con un Máster en Machine Learning y Ciencia de Datos. Combino ambos mundos para construir productos web escalables, seguros y con inteligencia integrada: desde la base de datos hasta el modelo de IA y la interfaz.',
+          aboutP2: 'En el sector público he desarrollado más de 50 aplicaciones para la administración, entre ellas la web municipal del Ayuntamiento de El Puerto de Santa María y el portal de la Oficina de Turismo. En el sector privado he trabajado en plataformas de streaming, sistemas de gestión hotelera y asistentes de inteligencia artificial. También he sido docente de HTML, CSS y diseño responsive en la Universidad de Cádiz. Un apasionado de mi trabajo.',
+          stat1: 'años desarrollando',
+          stat2: 'apps para el sector público',
+          stat3: 'Máster en Ciencia de Datos',
+          techTitle: 'Tecnologías',
+          nowTitle: 'Actualmente',
+          now1: 'Analista de Proyectos de Software · El Puerto de Santa María Global',
+          since2001: 'desde 2001',
+          since2021: 'desde 2021',
+          certTitle: 'Certificaciones',
+          deg1: 'Ingeniero Técnico en Informática de Gestión',
+          deg2: 'Grado en Informática',
+          eduTitle: 'Formación',
+          uca: 'Universidad de Cádiz',
+          eqf: 'MECES · nivel 6 EQF',
+          master: 'Máster en Machine Learning y Ciencia de Datos con Python y R',
+          tasksTitle: 'Lista de tareas',
+          newTask: 'Nueva tarea',
+          placeholder: '¿Qué tienes pendiente?',
+          add: 'Añadir',
+          filterLabel: 'Filtrar tareas',
+          fAll: 'Todas', fActive: 'Pendientes', fDone: 'Hechas',
+          clearDone: 'Borrar completadas',
+          hint: 'Doble clic en una tarea para editarla.',
+          noStorage: 'Aviso: el navegador no permite guardar; las tareas se perderán al recargar.',
+          count: (p, d) => `${p} pendiente${p === 1 ? '' : 's'} · ${d} hecha${d === 1 ? '' : 's'}`,
+          emptyAll: 'Aún no hay tareas. ¡Añade la primera!',
+          emptyDone: 'Nada completado todavía.',
+          emptyActive: '¡Todo hecho! 🎉',
+          markDone: 'Marcar como hecha: ',
+          del: 'Borrar: ',
+          editHint: 'Doble clic para editar',
+          editLabel: 'Editar tarea',
+          toDark: 'Cambiar a modo oscuro',
+          toLight: 'Cambiar a modo claro'
+        },
+        en: {
+          role: 'Full Stack Developer · Machine Learning & Data Science',
+          current: 'Software Project Analyst at <strong>El Puerto Global</strong> and Senior Developer at <strong>Bravent</strong>',
+          location: '📍 El Puerto de Santa María, Cádiz (Spain)',
+          ctaContact: 'Contact me',
+          mailSubject: 'Contact from your website',
+          aboutTitle: 'About me',
+          aboutLead: 'I build web applications that don’t just work — they learn from data.',
+          aboutP1: 'I’m a Full Stack Developer with a Master’s in Machine Learning and Data Science. I combine both worlds to build scalable, secure web products with built-in intelligence: from the database to the AI model and the interface.',
+          aboutP2: 'In the public sector I have developed more than 50 applications for local government, including the municipal website of El Puerto de Santa María City Council and the Tourist Office portal. In the private sector I have worked on streaming platforms, hotel management systems and AI assistants. I have also taught HTML, CSS and responsive design at the University of Cádiz. Passionate about what I do.',
+          stat1: 'years building software',
+          stat2: 'public sector apps',
+          stat3: 'Master’s in Data Science',
+          techTitle: 'Technologies',
+          nowTitle: 'Currently',
+          now1: 'Software Project Analyst · El Puerto de Santa María Global',
+          since2001: 'since 2001',
+          since2021: 'since 2021',
+          certTitle: 'Certifications',
+          deg1: 'Technical Engineer in Computer Science (Management Information Systems)',
+          deg2: 'Bachelor’s Degree in Computer Science',
+          eduTitle: 'Education',
+          uca: 'University of Cádiz',
+          eqf: 'MECES · EQF level 6',
+          master: 'Master’s in Machine Learning and Data Science with Python and R',
+          tasksTitle: 'To-do list',
+          newTask: 'New task',
+          placeholder: 'What do you need to do?',
+          add: 'Add',
+          filterLabel: 'Filter tasks',
+          fAll: 'All', fActive: 'Pending', fDone: 'Done',
+          clearDone: 'Clear completed',
+          hint: 'Double-click a task to edit it.',
+          noStorage: 'Note: your browser blocks storage; tasks will be lost on reload.',
+          count: (p, d) => `${p} pending · ${d} done`,
+          emptyAll: 'No tasks yet. Add your first one!',
+          emptyDone: 'Nothing completed yet.',
+          emptyActive: 'All done! 🎉',
+          markDone: 'Mark as done: ',
+          del: 'Delete: ',
+          editHint: 'Double-click to edit',
+          editLabel: 'Edit task',
+          toDark: 'Switch to dark mode',
+          toLight: 'Switch to light mode'
+        }
+      };
+
+      const LANG_KEY = 'miweb.lang';
+      const KEY = 'miweb.todos.v1';
+      let lang = 'es';
+      try { lang = localStorage.getItem(LANG_KEY) || ''; } catch (e) { lang = ''; }
+      if (!I18N[lang]) lang = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+      const t = k => I18N[lang][k];
+
+      function applyLang() {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+        document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+        document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+        document.getElementById('contact-btn').href =
+          'mailto:joseluis.dominguezrondan@gmail.com?subject=' + encodeURIComponent(t('mailSubject'));
+        applyTheme();
+        render();
+      }
+
+      /* ---------- Tema claro / oscuro ---------- */
+      const themeBtn = document.getElementById('theme-btn');
+      function applyTheme() {
+        const dark = document.documentElement.dataset.theme === 'dark';
+        themeBtn.textContent = dark ? '☀️' : '🌙';
+        themeBtn.setAttribute('aria-label', t(dark ? 'toLight' : 'toDark'));
+        themeBtn.title = t(dark ? 'toLight' : 'toDark');
+      }
+      themeBtn.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('miweb.theme', next); } catch (e) {}
+        applyTheme();
+      });
+      document.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => {
+        lang = b.dataset.lang;
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        applyLang();
+      }));
+
+      /* ---------- Lista de tareas ---------- */
+      const form = document.getElementById('todo-form');
+      const input = document.getElementById('todo-input');
+      const list = document.getElementById('todo-list');
+      const empty = document.getElementById('empty');
+      const count = document.getElementById('count');
+      const clearBtn = document.getElementById('clear-done');
+      const note = document.getElementById('note');
+      const filterBtns = document.querySelectorAll('[data-filter]');
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      let storageOk = true;
+      let filter = 'all';
+      let todos = load();
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(KEY);
+          const data = raw ? JSON.parse(raw) : [];
+          return Array.isArray(data) ? data.filter(x => x && typeof x.text === 'string') : [];
+        } catch (e) {
+          storageOk = false;
+          return [];
+        }
+      }
+      function save() {
+        try { localStorage.setItem(KEY, JSON.stringify(todos)); }
+        catch (e) { storageOk = false; }
+      }
+      const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+      const trashIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>';
+
+      function render() {
+        list.textContent = '';
+        const visible = todos.filter(x => filter === 'all' || (filter === 'done' ? x.done : !x.done));
+
+        for (const item of visible) {
+          const li = document.createElement('li');
+          li.className = 'todo' + (item.done ? ' done' : '');
+          li.dataset.id = item.id;
+
+          const cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.checked = item.done;
+          cb.setAttribute('aria-label', t('markDone') + item.text);
+
+          const span = document.createElement('span');
+          span.className = 'text';
+          span.textContent = item.text;
+          span.title = t('editHint');
+
+          const del = document.createElement('button');
+          del.type = 'button';
+          del.className = 'icon-btn';
+          del.setAttribute('aria-label', t('del') + item.text);
+          del.innerHTML = trashIcon;
+
+          li.append(cb, span, del);
+          list.appendChild(li);
+        }
+
+        const pending = todos.filter(x => !x.done).length;
+        const done = todos.length - pending;
+        count.textContent = todos.length ? t('count')(pending, done) : '';
+        clearBtn.hidden = done === 0;
+
+        empty.hidden = visible.length > 0;
+        empty.textContent = todos.length === 0 ? t('emptyAll')
+          : (filter === 'done' ? t('emptyDone') : t('emptyActive'));
+
+        note.textContent = storageOk ? t('hint') : t('noStorage');
+      }
+
+      function update(fn) { fn(); save(); render(); }
+      const find = id => todos.find(x => x.id === id);
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
+        update(() => todos.unshift({ id: uid(), text, done: false }));
+        input.value = '';
+        input.focus();
+      });
+
+      list.addEventListener('change', e => {
+        if (e.target.type !== 'checkbox') return;
+        const item = find(e.target.closest('.todo').dataset.id);
+        if (item) update(() => { item.done = e.target.checked; });
+      });
+
+      list.addEventListener('click', e => {
+        const btn = e.target.closest('.icon-btn');
+        if (!btn) return;
+        const id = btn.closest('.todo').dataset.id;
+        update(() => { todos = todos.filter(x => x.id !== id); });
+      });
+
+      list.addEventListener('dblclick', e => {
+        const span = e.target.closest('.text');
+        if (!span) return;
+        const item = find(span.closest('.todo').dataset.id);
+        if (!item) return;
+
+        const edit = document.createElement('input');
+        edit.className = 'edit';
+        edit.value = item.text;
+        edit.maxLength = 200;
+        edit.setAttribute('aria-label', t('editLabel'));
+        span.replaceWith(edit);
+        edit.focus();
+        edit.select();
+
+        let finished = false;
+        const finish = commit => {
+          if (finished) return;
+          finished = true;
+          const text = edit.value.trim();
+          if (commit && text) update(() => { item.text = text; });
+          else if (commit && !text) update(() => { todos = todos.filter(x => x !== item); });
+          else render();
+        };
+        edit.addEventListener('keydown', ev => {
+          if (ev.key === 'Enter') finish(true);
+          if (ev.key === 'Escape') finish(false);
+        });
+        edit.addEventListener('blur', () => finish(true));
+      });
+
+      filterBtns.forEach(b => b.addEventListener('click', () => {
+        filter = b.dataset.filter;
+        filterBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+        render();
+      }));
+
+      clearBtn.addEventListener('click', () => update(() => { todos = todos.filter(x => !x.done); }));
+
+      // Sincroniza si la página está abierta en varias pestañas
+      window.addEventListener('storage', e => { if (e.key === KEY) { todos = load(); render(); } });
+
+      applyLang();
+    })();
+  </script>
+</body>
+</html>
