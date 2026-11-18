@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Genera cv/CV-JoseLuisDominguezRondan-{ES,EN}.pdf imprimiendo index.html con Chrome/Edge en modo headless.
+# Genera docs/CV-JoseLuisDominguezRondan-{ES,EN}.pdf imprimiendo index.html con Chrome/Edge en modo headless.
 # Uso (Git Bash):  bash tools/build-cv.sh
 # Vuelve a ejecutarlo cada vez que cambies el contenido de index.html.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-mkdir -p "$ROOT/cv"
+mkdir -p "$ROOT/docs"
 
 BROWSER=""
 for c in "/c/Program Files/Google/Chrome/Application/chrome.exe" \
@@ -20,9 +20,9 @@ PROFILE="$(mktemp -d)"
 trap 'rm -rf "$PROFILE"' EXIT
 
 for LANG_CODE in es en; do
-  OUT="$ROOT/cv/CV-JoseLuisDominguezRondan-${LANG_CODE^^}.pdf"
+  OUT="$ROOT/docs/CV-JoseLuisDominguezRondan-${LANG_CODE^^}.pdf"
   "$BROWSER" --headless=new --disable-gpu --no-first-run --user-data-dir="$(cygpath -w "$PROFILE")" \
     --no-pdf-header-footer --virtual-time-budget=3000 \
     --print-to-pdf="$(cygpath -w "$OUT")" "${PAGE_URL}?lang=${LANG_CODE}" 2>/dev/null
-  echo "Generado: cv/$(basename "$OUT")"
+  echo "Generado: docs/$(basename "$OUT")"
 done

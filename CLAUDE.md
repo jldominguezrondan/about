@@ -13,7 +13,7 @@ Web personal / CV online de José Luis Domínguez Rondán. Sitio estático sin d
   ```bash
   bash tools/build-cv.sh
   ```
-  Imprime `index.html?lang=es|en` en headless y escribe `cv/CV-JoseLuisDominguezRondan-{ES,EN}.pdf`. Hay que volver a ejecutarlo y commitear los PDF **cada vez que cambie el contenido** (`index.html` o los textos de `js/scripts.js`) o los estilos de impresión de `css/estilos.css`, o el botón "Descargar CV" servirá un CV desactualizado.
+  Imprime `index.html?lang=es|en` en headless y escribe `docs/CV-JoseLuisDominguezRondan-{ES,EN}.pdf`. Hay que volver a ejecutarlo y commitear los PDF **cada vez que cambie el contenido** (`index.html` o los textos de `js/scripts.js`) o los estilos de impresión de `css/estilos.css`, o el botón "Descargar CV" servirá un CV desactualizado.
 - No hay tests, linter ni Node en este entorno.
 
 ## Arquitectura

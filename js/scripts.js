@@ -124,7 +124,7 @@
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
     document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
     document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
-    document.getElementById('cv-btn').href = 'cv/CV-JoseLuisDominguezRondan-' + lang.toUpperCase() + '.pdf';
+    document.getElementById('cv-btn').href = 'docs/CV-JoseLuisDominguezRondan-' + lang.toUpperCase() + '.pdf';
     document.getElementById('contact-btn').href =
       'mailto:joseluis.dominguezrondan@gmail.com?subject=' + encodeURIComponent(t('mailSubject'));
     applyTheme();
