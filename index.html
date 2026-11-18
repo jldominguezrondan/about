@@ -145,6 +145,9 @@
     p { margin: 0 0 14px; }
     p:last-child { margin-bottom: 0; }
 
+    .about-list { margin: 0 0 1em; padding-left: 20px; }
+    .about-list li { margin: 4px 0; }
+    .about-list li::marker { color: var(--accent); }
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 4px; }
     .stat { background: var(--accent-soft); border-radius: 12px; padding: 14px 12px; text-align: center; }
     .stat strong {
@@ -166,53 +169,20 @@
     .roles li:last-child { border-bottom: 0; }
     .roles small { color: var(--muted); white-space: nowrap; }
 
-    /* ---------- Tareas ---------- */
-    .todo-form { display: flex; gap: 10px; }
-    .todo-form input {
-      flex: 1; min-width: 0;
-      padding: 11px 14px; border-radius: 10px;
-      border: 1px solid var(--border); background: var(--bg); color: var(--text);
-      font: inherit;
-    }
-    .todo-form input:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
-
-    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 18px 0 8px; }
-    .filters { display: inline-flex; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
-    .filters button {
-      border: 0; background: transparent; color: var(--muted);
-      padding: 6px 12px; border-radius: 7px; font: inherit; font-size: 14px; cursor: pointer;
-    }
-    .filters button[aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); font-weight: 600; }
-    .count { color: var(--muted); font-size: 14px; }
-
-    .todo-list { list-style: none; margin: 0; padding: 0; }
-    .todo {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 4px; border-bottom: 1px solid var(--border);
-    }
-    .todo:last-child { border-bottom: 0; }
-    .todo input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex: none; cursor: pointer; }
-    .todo .text { flex: 1; min-width: 0; overflow-wrap: anywhere; cursor: text; }
-    .todo.done .text { color: var(--muted); text-decoration: line-through; }
-    .todo .edit {
-      flex: 1; min-width: 0; font: inherit; color: var(--text);
-      padding: 4px 8px; border: 1px solid var(--accent); border-radius: 6px; background: var(--bg);
-    }
-    .icon-btn {
-      flex: none; border: 0; background: transparent; color: var(--muted);
-      width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
-      display: grid; place-items: center; opacity: .55;
-    }
-    .todo:hover .icon-btn, .icon-btn:focus-visible { opacity: 1; }
-    .icon-btn:hover { color: var(--danger); background: var(--bg); }
-    .icon-btn svg { width: 18px; height: 18px; }
-
-    .empty { text-align: center; color: var(--muted); padding: 24px 0 8px; }
-    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
-    .link-btn { border: 0; background: none; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer; padding: 4px; }
-    .link-btn:hover { color: var(--danger); }
-    .link-btn[hidden] { display: none; }
-    .note { font-size: 13px; color: var(--muted); }
+    /* ---------- Experiencia ---------- */
+    .xp { list-style: none; margin: 0; padding: 0; }
+    .xp > li { position: relative; padding: 12px 0 12px 20px; border-left: 2px solid var(--border); }
+    .xp > li::before { content: ""; position: absolute; left: -6px; top: 19px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--surface); }
+    .xp-head { display: flex; justify-content: space-between; gap: 12px; }
+    .xp-head small { color: var(--muted); white-space: nowrap; }
+    .xp-org { color: var(--muted); }
+    .xp-desc { margin-top: 4px; color: var(--muted); font-size: 15px; }
+    .xp-desc p { margin: 0 0 6px; }
+    .xp-desc p:last-child { margin-bottom: 0; }
+    .xp-desc ul { margin: 0 0 6px; padding-left: 18px; }
+    .xp-desc ul ul { margin: 2px 0 0; list-style: '– '; }
+    .xp-desc li { margin: 2px 0; }
+    .xp-desc .xp-label { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin: 8px 0 4px; }
 
     footer.site { text-align: center; color: var(--muted); font-size: 14px; padding: 16px 0 48px; }
 
@@ -223,8 +193,7 @@
       section.card { padding: 20px; }
       .stats { gap: 8px; }
       .stat strong { font-size: 20px; }
-      .roles li { flex-direction: column; gap: 0; }
-      .todo .icon-btn { opacity: 1; }
+      .roles li, .xp-head { flex-direction: column; gap: 0; }
     }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
   </style>
@@ -303,25 +272,23 @@
         <h2><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span id="sobre-mi-title" data-i18n="aboutTitle"></span></h2>
         <p><strong data-i18n="aboutLead"></strong></p>
         <p data-i18n="aboutP1"></p>
-        <p data-i18n="aboutP2"></p>
+        <ul class="about-list">
+          <li data-i18n-html="aboutPublic"></li>
+          <li data-i18n-html="aboutPrivate"></li>
+        </ul>
+        <p><strong data-i18n="aboutClose"></strong></p>
 
         <div class="stats">
           <div class="stat"><strong>25+</strong><span data-i18n="stat1"></span></div>
-          <div class="stat"><strong>50+</strong><span data-i18n="stat2"></span></div>
+          <div class="stat"><strong>60+</strong><span data-i18n="stat2"></span></div>
           <div class="stat"><strong>ML</strong><span data-i18n="stat3"></span></div>
         </div>
 
         <h3 data-i18n="techTitle"></h3>
         <ul class="tags">
           <li>Python</li><li>R</li><li>Machine Learning</li><li>PHP</li><li>MySQL</li>
-          <li>Linux / Apache</li><li>.NET · C#</li><li>Microsoft Azure</li>
+          <li>LAMP · WISA</li><li data-i18n="dataAnalysis"></li><li>.NET · C#</li><li>Microsoft Azure</li>
           <li>Dynamics 365 BC (AL)</li><li>SPA · PWA</li><li>Responsive Design</li>
-        </ul>
-
-        <h3 data-i18n="nowTitle"></h3>
-        <ul class="roles">
-          <li><span data-i18n="now1"></span><small data-i18n="since2001"></small></li>
-          <li><span>Senior Developer · Bravent</span><small data-i18n="since2021"></small></li>
         </ul>
 
         <h3 data-i18n="eduTitle"></h3>
@@ -329,6 +296,13 @@
           <li><span><strong data-i18n="deg1"></strong> · <span data-i18n="uca"></span></span><small>1997 – 2001</small></li>
           <li><span><strong data-i18n="deg2"></strong> · <span data-i18n="eqf"></span></span><small>2022</small></li>
           <li><span><span data-i18n="master"></span> · campusMVP</span><small>2024</small></li>
+          <li><span><span data-i18n="degSys"></span> · <span data-i18n="uma"></span></span><small>1995 – 1996</small></li>
+        </ul>
+
+        <h3 data-i18n="langTitle"></h3>
+        <ul class="tags">
+          <li data-i18n="langEs"></li>
+          <li data-i18n="langEn"></li>
         </ul>
 
         <h3 data-i18n="certTitle"></h3>
@@ -338,30 +312,49 @@
         </ul>
       </section>
 
-      <section class="card" id="tareas" aria-labelledby="tareas-title">
-        <h2><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span><span id="tareas-title" data-i18n="tasksTitle"></span></h2>
-        <form class="todo-form" id="todo-form" autocomplete="off">
-          <label for="todo-input" class="sr-only" data-i18n="newTask"></label>
-          <input id="todo-input" type="text" data-i18n-placeholder="placeholder" maxlength="200" required>
-          <button class="btn" type="submit" data-i18n="add"></button>
-        </form>
-
-        <div class="toolbar">
-          <div class="filters" role="group" data-i18n-aria="filterLabel">
-            <button type="button" data-filter="all" aria-pressed="true" data-i18n="fAll"></button>
-            <button type="button" data-filter="active" aria-pressed="false" data-i18n="fActive"></button>
-            <button type="button" data-filter="done" aria-pressed="false" data-i18n="fDone"></button>
-          </div>
-          <span class="count" id="count" aria-live="polite"></span>
-        </div>
-
-        <ul class="todo-list" id="todo-list"></ul>
-        <p class="empty" id="empty" hidden></p>
-
-        <div class="footer-row">
-          <span class="note" id="note"></span>
-          <button type="button" class="link-btn" id="clear-done" hidden data-i18n="clearDone"></button>
-        </div>
+      <section class="card" id="experiencia" aria-labelledby="experiencia-title">
+        <h2><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></span><span id="experiencia-title" data-i18n="xpTitle"></span></h2>
+        <ol class="xp">
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp1Role"></strong> <span class="xp-org">· Bravent</span></span><small>2021 – <span data-i18n="present"></span></small></div>
+            <div class="xp-desc" data-i18n-html="xp1Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp2Role"></strong> <span class="xp-org">· El Puerto de Santa María Global</span></span><small>2001 – <span data-i18n="present"></span></small></div>
+            <div class="xp-desc" data-i18n-html="xp2Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp3Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2020 – 2024</small></div>
+            <div class="xp-desc" data-i18n-html="xp3Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp4Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2018 – 2024</small></div>
+            <div class="xp-desc" data-i18n-html="xp4Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp5Role"></strong> <span class="xp-org">· Babyradio</span></span><small>2018 – 2021</small></div>
+            <div class="xp-desc" data-i18n-html="xp5Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp6Role"></strong> <span class="xp-org">· Leapforce</span></span><small>2016 – 2018</small></div>
+            <div class="xp-desc" data-i18n-html="xp6Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp7Role"></strong> <span class="xp-org">· Lionbridge</span></span><small>2013 – 2016</small></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp8Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2012 – 2013</small></div>
+            <div class="xp-desc" data-i18n-html="xp8Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp9Role"></strong> <span class="xp-org">· Lionbridge Technologies</span></span><small>2006 – 2010</small></div>
+            <div class="xp-desc" data-i18n-html="xp9Desc"></div>
+          </li>
+          <li>
+            <div class="xp-head"><span><strong data-i18n="xp10Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2002 – 2006</small></div>
+            <div class="xp-desc" data-i18n-html="xp10Desc"></div>
+          </li>
+        </ol>
       </section>
     </main>
 
@@ -379,17 +372,42 @@
           ctaContact: 'Contactar',
           mailSubject: 'Contacto desde tu web',
           aboutTitle: 'Sobre mí',
-          aboutLead: 'Desarrollo aplicaciones web que no solo funcionan: aprenden de los datos.',
-          aboutP1: 'Soy Full Stack Developer con un Máster en Machine Learning y Ciencia de Datos. Combino ambos mundos para construir productos web escalables, seguros y con inteligencia integrada: desde la base de datos hasta el modelo de IA y la interfaz.',
-          aboutP2: 'En el sector público he desarrollado más de 50 aplicaciones para la administración, entre ellas la web municipal del Ayuntamiento de El Puerto de Santa María y el portal de la Oficina de Turismo. En el sector privado he trabajado en plataformas de streaming, sistemas de gestión hotelera y asistentes de inteligencia artificial. También he sido docente de HTML, CSS y diseño responsive en la Universidad de Cádiz. Un apasionado de mi trabajo.',
+          aboutLead: 'Ingeniero de Software, Full Stack Developer con un Máster en Machine Learning y Ciencia de Datos.',
+          aboutP1: 'Construyo productos escalables, seguros y con inteligencia integrada: desde la base de datos hasta el modelo de IA y la interfaz.',
+          aboutPublic: '<strong>Sector público:</strong> más de 50 aplicaciones desarrolladas para la administración pública.',
+          aboutPrivate: '<strong>Sector privado:</strong> plataformas de streaming, sistemas de gestión hotelera y asistentes de inteligencia artificial, entre otros proyectos.',
+          aboutClose: 'Un apasionado de mi trabajo.',
           stat1: 'años desarrollando',
           stat2: 'apps para el sector público',
           stat3: 'Máster en Ciencia de Datos',
           techTitle: 'Tecnologías',
-          nowTitle: 'Actualmente',
-          now1: 'Analista de Proyectos de Software · El Puerto de Santa María Global',
-          since2001: 'desde 2001',
-          since2021: 'desde 2021',
+          dataAnalysis: 'Análisis de datos',
+          degSys: 'Ingeniería Técnica en Informática de Sistemas',
+          uma: 'Universidad de Málaga',
+          langTitle: 'Idiomas',
+          langEs: 'Español · nativo',
+          langEn: 'Inglés · competencia profesional completa',
+          xpTitle: 'Experiencia',
+          present: 'actualidad',
+          xp1Role: 'Senior developer',
+          xp1Desc: '<p>Desarrollador Senior Backend especializado en el diseño, mantenimiento y evolución de sistemas empresariales multi-tecnología, abarcando desde entornos Open Source hasta la suite corporativa de Microsoft.</p><p class="xp-label">Principales responsabilidades y stack</p><ul><li><strong>Desarrollo Backend (Stack LAMP):</strong> Diseño, arquitectura e implementación de servicios backend robustos utilizando Linux, Apache, MySQL y PHP. Optimización de rendimiento, bases de datos y desarrollo de APIs.</li><li><strong>Ecosistema Microsoft &amp; ERP:</strong> Desarrollo de extensiones a medida para Dynamics 365 Business Central utilizando el lenguaje AL. Mantenimiento, refactorización y actualización de código en aplicaciones legadas y modernas desarrolladas en .NET (C#).</li></ul>',
+          xp2Role: 'Analista de Proyectos de Software',
+          xp2Desc: '<p>Analista de Proyectos de Software con más de 25 años de experiencia en la conceptualización, desarrollo e implantación de soluciones tecnológicas para la administración local.</p><p>A lo largo de mi trayectoria he impulsado la transformación digital del ayuntamiento mediante el desarrollo de portales web de servicio a la ciudadanía y de herramientas internas de gestión, algunas de ellas con más de 500 usuarios.</p><p class="xp-label">Responsabilidades y logros clave</p><ul><li><strong>Desarrollo de aplicaciones:</strong> análisis, diseño e implantación de más de 60 aplicaciones a medida sobre entornos LAMP y WISA, adaptando la arquitectura a los requisitos de cada proyecto.</li><li><strong>Dirección técnica de proyectos:</strong> liderazgo y desarrollo de portales institucionales y sistemas corporativos críticos, entre ellos:<ul><li>Portales web municipales y sus gestores de contenidos (CMS)</li><li>Escritorio Corporativo Municipal</li><li>Control de Presencia y Permisos Retribuidos</li><li>Portal de la Oficina de Turismo</li><li>Gestor de Aplicaciones Municipal</li><li>Aplicaciones de registro (entrada/salida, solicitudes, etc.)</li><li>Integración de soluciones de terceros en el ecosistema tecnológico municipal</li></ul></li><li><strong>Evolución y mantenimiento:</strong> actualización tecnológica y mantenimiento continuo de la plataforma digital del ayuntamiento, garantizando su disponibilidad y seguridad.</li></ul>',
+          xp3Role: 'Docente Externo',
+          xp3Desc: '<p>Profesor de HTML, CSS y RWD en el Máster Online de Marketing Digital y Social, y en diversos cursos para expertos.</p>',
+          xp4Role: 'Ponente',
+          xp4Desc: '<p>Ponente en el Máster en Dirección de Marketing Digital y Social, Marketing Socioambiental, en la asignatura “Estrategias de Marketing Digital en Organizaciones No Lucrativas”.</p>',
+          xp5Role: 'Responsable Departamento Informática',
+          xp5Desc: '<p>Fullstack Developer.<br>Responsable técnico y de sistemas informáticos.<br>Desarrollador de aplicaciones y sitios web.<br>Desarrollador de Skills Babyradio para Amazon’s Alexa.</p>',
+          xp6Role: 'Internet Assessor',
+          xp6Desc: '<p>Trabajando para Google a través de esta empresa en el proyecto “Rating Program” como evaluador de resultados del motor de búsquedas de Google y Google Maps.</p>',
+          xp7Role: 'Internet Assessor',
+          xp8Role: 'Desarrollador de Software',
+          xp8Desc: '<p>Desarrollo de una aplicación de gestión remota de presupuestos con geolocalización de clientes y gestión de hoja de ruta integrada con Google Maps.</p>',
+          xp9Role: 'Result Rater',
+          xp9Desc: '<p>Trabajando para Google a través de esta empresa en el proyecto “Rating Program” como evaluador de resultados de consultas de Google para ayudar al buscador a dar resultados coherentes según el perfil del usuario.</p>',
+          xp10Role: 'Desarrollador de Software',
+          xp10Desc: '<p>Encargado del mantenimiento de los equipos informáticos y desarrollador de la aplicación de Gestión Integral de Presupuestos, Clientes, Pedidos, Facturación y Almacén.</p>',
           certTitle: 'Certificaciones',
           deg1: 'Ingeniero Técnico en Informática de Gestión',
           deg2: 'Grado en Informática',
@@ -397,23 +415,6 @@
           uca: 'Universidad de Cádiz',
           eqf: 'MECES · nivel 6 EQF',
           master: 'Máster en Machine Learning y Ciencia de Datos con Python y R',
-          tasksTitle: 'Lista de tareas',
-          newTask: 'Nueva tarea',
-          placeholder: '¿Qué tienes pendiente?',
-          add: 'Añadir',
-          filterLabel: 'Filtrar tareas',
-          fAll: 'Todas', fActive: 'Pendientes', fDone: 'Hechas',
-          clearDone: 'Borrar completadas',
-          hint: 'Doble clic en una tarea para editarla.',
-          noStorage: 'Aviso: el navegador no permite guardar; las tareas se perderán al recargar.',
-          count: (p, d) => `${p} pendiente${p === 1 ? '' : 's'} · ${d} hecha${d === 1 ? '' : 's'}`,
-          emptyAll: 'Aún no hay tareas. ¡Añade la primera!',
-          emptyDone: 'Nada completado todavía.',
-          emptyActive: '¡Todo hecho! 🎉',
-          markDone: 'Marcar como hecha: ',
-          del: 'Borrar: ',
-          editHint: 'Doble clic para editar',
-          editLabel: 'Editar tarea',
           toDark: 'Cambiar a modo oscuro',
           toLight: 'Cambiar a modo claro'
         },
@@ -424,17 +425,42 @@
           ctaContact: 'Contact me',
           mailSubject: 'Contact from your website',
           aboutTitle: 'About me',
-          aboutLead: 'I build web applications that don’t just work — they learn from data.',
-          aboutP1: 'I’m a Full Stack Developer with a Master’s in Machine Learning and Data Science. I combine both worlds to build scalable, secure web products with built-in intelligence: from the database to the AI model and the interface.',
-          aboutP2: 'In the public sector I have developed more than 50 applications for local government, including the municipal website of El Puerto de Santa María City Council and the Tourist Office portal. In the private sector I have worked on streaming platforms, hotel management systems and AI assistants. I have also taught HTML, CSS and responsive design at the University of Cádiz. Passionate about what I do.',
+          aboutLead: 'Software Engineer, Full Stack Developer with a Master’s in Machine Learning and Data Science.',
+          aboutP1: 'I build scalable, secure products with built-in intelligence: from the database to the AI model and the interface.',
+          aboutPublic: '<strong>Public sector:</strong> more than 50 applications developed for public administration.',
+          aboutPrivate: '<strong>Private sector:</strong> streaming platforms, hotel management systems and AI assistants, among other projects.',
+          aboutClose: 'Passionate about what I do.',
           stat1: 'years building software',
           stat2: 'public sector apps',
           stat3: 'Master’s in Data Science',
           techTitle: 'Technologies',
-          nowTitle: 'Currently',
-          now1: 'Software Project Analyst · El Puerto de Santa María Global',
-          since2001: 'since 2001',
-          since2021: 'since 2021',
+          dataAnalysis: 'Data analysis',
+          degSys: 'Technical Engineering in Computer Systems',
+          uma: 'University of Málaga',
+          langTitle: 'Languages',
+          langEs: 'Spanish · native',
+          langEn: 'English · full professional proficiency',
+          xpTitle: 'Experience',
+          present: 'present',
+          xp1Role: 'Senior Developer',
+          xp1Desc: '<p>Senior Backend Developer specialized in the design, maintenance and evolution of multi-technology enterprise systems, ranging from Open Source environments to the Microsoft corporate suite.</p><p class="xp-label">Main responsibilities and stack</p><ul><li><strong>Backend Development (LAMP Stack):</strong> Design, architecture and implementation of robust backend services using Linux, Apache, MySQL and PHP. Performance and database optimization and API development.</li><li><strong>Microsoft Ecosystem &amp; ERP:</strong> Development of custom extensions for Dynamics 365 Business Central using the AL language. Maintenance, refactoring and updating of code in legacy and modern applications built with .NET (C#).</li></ul>',
+          xp2Role: 'Software Project Analyst',
+          xp2Desc: '<p>Software Project Analyst with more than 25 years of experience in the conception, development and implementation of technology solutions for local government.</p><p>Throughout my career I have driven the City Council’s digital transformation by developing citizen-facing web portals and internal management tools, some of them with more than 500 users.</p><p class="xp-label">Key responsibilities and achievements</p><ul><li><strong>Application development:</strong> analysis, design and implementation of more than 60 custom applications on LAMP and WISA environments, adapting the architecture to the requirements of each project.</li><li><strong>Technical project leadership:</strong> leading and developing institutional portals and critical corporate systems, including:<ul><li>Municipal websites and their content management systems (CMS)</li><li>Municipal Corporate Desktop</li><li>Time &amp; Attendance and Paid Leave management</li><li>Tourist Office portal</li><li>Municipal Application Manager</li><li>Registry applications (incoming/outgoing records, requests, etc.)</li><li>Integration of third-party solutions into the municipal technology ecosystem</li></ul></li><li><strong>Evolution and maintenance:</strong> technology upgrades and ongoing maintenance of the City Council’s digital platform, ensuring its availability and security.</li></ul>',
+          xp3Role: 'External Lecturer',
+          xp3Desc: '<p>Lecturer of HTML, CSS and RWD in the Online Master’s in Digital and Social Marketing, and in several expert courses.</p>',
+          xp4Role: 'Speaker',
+          xp4Desc: '<p>Speaker in the Master’s in Digital and Social Marketing Management, Socio-environmental Marketing, in the course “Digital Marketing Strategies in Non-Profit Organizations”.</p>',
+          xp5Role: 'Head of IT Department',
+          xp5Desc: '<p>Fullstack Developer.<br>Technical and IT systems lead.<br>Application and website developer.<br>Developer of Babyradio Skills for Amazon’s Alexa.</p>',
+          xp6Role: 'Internet Assessor',
+          xp6Desc: '<p>Working for Google through this company on the “Rating Program” project, evaluating results from the Google search engine and Google Maps.</p>',
+          xp7Role: 'Internet Assessor',
+          xp8Role: 'Software Developer',
+          xp8Desc: '<p>Development of a remote quote management application with customer geolocation and route sheet management integrated with Google Maps.</p>',
+          xp9Role: 'Result Rater',
+          xp9Desc: '<p>Working for Google through this company on the “Rating Program” project, evaluating Google query results to help the search engine return results consistent with the user’s profile.</p>',
+          xp10Role: 'Software Developer',
+          xp10Desc: '<p>In charge of maintaining the company’s computer equipment and developer of the Integrated Management application for Quotes, Customers, Orders, Invoicing and Warehouse.</p>',
           certTitle: 'Certifications',
           deg1: 'Technical Engineer in Computer Science (Management Information Systems)',
           deg2: 'Bachelor’s Degree in Computer Science',
@@ -442,30 +468,12 @@
           uca: 'University of Cádiz',
           eqf: 'MECES · EQF level 6',
           master: 'Master’s in Machine Learning and Data Science with Python and R',
-          tasksTitle: 'To-do list',
-          newTask: 'New task',
-          placeholder: 'What do you need to do?',
-          add: 'Add',
-          filterLabel: 'Filter tasks',
-          fAll: 'All', fActive: 'Pending', fDone: 'Done',
-          clearDone: 'Clear completed',
-          hint: 'Double-click a task to edit it.',
-          noStorage: 'Note: your browser blocks storage; tasks will be lost on reload.',
-          count: (p, d) => `${p} pending · ${d} done`,
-          emptyAll: 'No tasks yet. Add your first one!',
-          emptyDone: 'Nothing completed yet.',
-          emptyActive: 'All done! 🎉',
-          markDone: 'Mark as done: ',
-          del: 'Delete: ',
-          editHint: 'Double-click to edit',
-          editLabel: 'Edit task',
           toDark: 'Switch to dark mode',
           toLight: 'Switch to light mode'
         }
       };
 
       const LANG_KEY = 'miweb.lang';
-      const KEY = 'miweb.todos.v1';
       let lang = 'es';
       try { lang = localStorage.getItem(LANG_KEY) || ''; } catch (e) { lang = ''; }
       if (!I18N[lang]) lang = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
@@ -481,7 +489,6 @@
         document.getElementById('contact-btn').href =
           'mailto:joseluis.dominguezrondan@gmail.com?subject=' + encodeURIComponent(t('mailSubject'));
         applyTheme();
-        render();
       }
 
       /* ---------- Tema claro / oscuro ---------- */
@@ -504,146 +511,7 @@
         applyLang();
       }));
 
-      /* ---------- Lista de tareas ---------- */
-      const form = document.getElementById('todo-form');
-      const input = document.getElementById('todo-input');
-      const list = document.getElementById('todo-list');
-      const empty = document.getElementById('empty');
-      const count = document.getElementById('count');
-      const clearBtn = document.getElementById('clear-done');
-      const note = document.getElementById('note');
-      const filterBtns = document.querySelectorAll('[data-filter]');
       document.getElementById('year').textContent = new Date().getFullYear();
-
-      let storageOk = true;
-      let filter = 'all';
-      let todos = load();
-
-      function load() {
-        try {
-          const raw = localStorage.getItem(KEY);
-          const data = raw ? JSON.parse(raw) : [];
-          return Array.isArray(data) ? data.filter(x => x && typeof x.text === 'string') : [];
-        } catch (e) {
-          storageOk = false;
-          return [];
-        }
-      }
-      function save() {
-        try { localStorage.setItem(KEY, JSON.stringify(todos)); }
-        catch (e) { storageOk = false; }
-      }
-      const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-
-      const trashIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>';
-
-      function render() {
-        list.textContent = '';
-        const visible = todos.filter(x => filter === 'all' || (filter === 'done' ? x.done : !x.done));
-
-        for (const item of visible) {
-          const li = document.createElement('li');
-          li.className = 'todo' + (item.done ? ' done' : '');
-          li.dataset.id = item.id;
-
-          const cb = document.createElement('input');
-          cb.type = 'checkbox';
-          cb.checked = item.done;
-          cb.setAttribute('aria-label', t('markDone') + item.text);
-
-          const span = document.createElement('span');
-          span.className = 'text';
-          span.textContent = item.text;
-          span.title = t('editHint');
-
-          const del = document.createElement('button');
-          del.type = 'button';
-          del.className = 'icon-btn';
-          del.setAttribute('aria-label', t('del') + item.text);
-          del.innerHTML = trashIcon;
-
-          li.append(cb, span, del);
-          list.appendChild(li);
-        }
-
-        const pending = todos.filter(x => !x.done).length;
-        const done = todos.length - pending;
-        count.textContent = todos.length ? t('count')(pending, done) : '';
-        clearBtn.hidden = done === 0;
-
-        empty.hidden = visible.length > 0;
-        empty.textContent = todos.length === 0 ? t('emptyAll')
-          : (filter === 'done' ? t('emptyDone') : t('emptyActive'));
-
-        note.textContent = storageOk ? t('hint') : t('noStorage');
-      }
-
-      function update(fn) { fn(); save(); render(); }
-      const find = id => todos.find(x => x.id === id);
-
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const text = input.value.trim();
-        if (!text) return;
-        update(() => todos.unshift({ id: uid(), text, done: false }));
-        input.value = '';
-        input.focus();
-      });
-
-      list.addEventListener('change', e => {
-        if (e.target.type !== 'checkbox') return;
-        const item = find(e.target.closest('.todo').dataset.id);
-        if (item) update(() => { item.done = e.target.checked; });
-      });
-
-      list.addEventListener('click', e => {
-        const btn = e.target.closest('.icon-btn');
-        if (!btn) return;
-        const id = btn.closest('.todo').dataset.id;
-        update(() => { todos = todos.filter(x => x.id !== id); });
-      });
-
-      list.addEventListener('dblclick', e => {
-        const span = e.target.closest('.text');
-        if (!span) return;
-        const item = find(span.closest('.todo').dataset.id);
-        if (!item) return;
-
-        const edit = document.createElement('input');
-        edit.className = 'edit';
-        edit.value = item.text;
-        edit.maxLength = 200;
-        edit.setAttribute('aria-label', t('editLabel'));
-        span.replaceWith(edit);
-        edit.focus();
-        edit.select();
-
-        let finished = false;
-        const finish = commit => {
-          if (finished) return;
-          finished = true;
-          const text = edit.value.trim();
-          if (commit && text) update(() => { item.text = text; });
-          else if (commit && !text) update(() => { todos = todos.filter(x => x !== item); });
-          else render();
-        };
-        edit.addEventListener('keydown', ev => {
-          if (ev.key === 'Enter') finish(true);
-          if (ev.key === 'Escape') finish(false);
-        });
-        edit.addEventListener('blur', () => finish(true));
-      });
-
-      filterBtns.forEach(b => b.addEventListener('click', () => {
-        filter = b.dataset.filter;
-        filterBtns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-        render();
-      }));
-
-      clearBtn.addEventListener('click', () => update(() => { todos = todos.filter(x => !x.done); }));
-
-      // Sincroniza si la página está abierta en varias pestañas
-      window.addEventListener('storage', e => { if (e.key === KEY) { todos = load(); render(); } });
 
       applyLang();
     })();
