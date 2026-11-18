@@ -94,7 +94,7 @@
     .hero-top { display: flex; align-items: center; gap: 20px; }
     .avatar {
       flex: none;
-      width: 72px; height: 72px; border-radius: 50%;
+      width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
       display: grid; place-items: center;
       background: linear-gradient(135deg, var(--accent), #7c3aed);
       color: #fff; font-weight: 700; font-size: 26px; letter-spacing: .5px;
@@ -191,6 +191,7 @@
 
     @media (max-width: 520px) {
       .hero-inner { padding: 20px 0 72px; }
+      .avatar { width: 72px; height: 72px; }
       .net { width: 120%; right: -30%; opacity: .3; }
       .hero-top { flex-direction: column; align-items: flex-start; gap: 16px; }
       section.card { padding: 20px; }
@@ -202,6 +203,65 @@
       .tech-label { padding-top: 0; }
     }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+    /* ---------- Impresión / CV en PDF ---------- */
+    .print-only { display: none; }
+    @page {
+      size: A4; margin: 12mm 14mm 14mm;
+      @bottom-left { content: "José Luis Domínguez Rondán"; font: 8pt system-ui, "Segoe UI", sans-serif; color: #6b7280; }
+      @bottom-right { content: counter(page) " / " counter(pages); font: 8pt system-ui, "Segoe UI", sans-serif; color: #6b7280; }
+    }
+    @media print {
+      :root, :root[data-theme="dark"] {
+        --bg: #fff; --surface: #fff; --text: #1a1d23; --muted: #4b5260; --border: #dfe3e8;
+        --accent: #2563eb; --accent-soft: #eef3ff; --shadow: none;
+        --grad: linear-gradient(120deg, #1d4ed8 0%, #4f46e5 45%, #7c3aed 75%, #db2777 100%);
+      }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; animation: none !important; transition: none !important; }
+      body { background: #fff; font-size: 10pt; line-height: 1.4; }
+      .wrap { max-width: none; padding: 0; }
+      .topbar, .actions, .hero-bg, .hero-wave, footer.site { display: none !important; }
+      .print-only { display: block; }
+
+      header.hero { background: none; color: var(--text); overflow: visible; }
+      .hero-inner { padding: 0 0 4mm; border-bottom: 2px solid var(--accent); margin-bottom: 4mm; }
+      .hero .avatar { width: 80px; height: 80px; border: 0; box-shadow: none; }
+      .hero .role { color: var(--accent); }
+      .hero .degree { background: var(--accent-soft); color: var(--text); border: 0; }
+      .hero .meta { color: var(--muted); margin-top: 10px; }
+      .print-contact { margin: 4px 0 0; color: var(--muted); font-size: 9.5pt; }
+      .print-contact a { color: var(--accent); text-decoration: none; }
+      h1 { font-size: 22pt; }
+
+      section.card { border: 0; box-shadow: none; border-radius: 0; padding: 0; margin: 0 0 5mm; overflow: visible; }
+      section.card::before { display: none; }
+      h2 { font-size: 13pt; margin: 0 0 3mm; padding-bottom: 1.5mm; border-bottom: 1px solid var(--border); break-after: avoid; }
+      h2 .ico { width: 24px; height: 24px; border-radius: 6px; }
+      h2 .ico svg { width: 14px; height: 14px; }
+      h3 { margin: 4mm 0 2mm; font-size: 8.5pt; break-after: avoid; }
+
+      .stats { margin: 3mm 0 0; gap: 8px; }
+      .stat { padding: 6px 8px; }
+      .stat strong { font-size: 14pt; background: none; color: var(--accent); }
+      .stat span { font-size: 8.5pt; }
+      .tags li { padding: 2px 9px; font-size: 9pt; }
+      .tags li:hover { transform: none; }
+      .tech-groups { gap: 5px; }
+      .tech-label { font-size: 9.5pt; padding-top: 2px; }
+
+      .xp > li { padding: 5px 0 5px 16px; }
+      .xp-head { break-after: avoid; }
+      .xp-desc li, .xp-desc p { break-inside: avoid; }
+      .xp > li::before { top: 12px; box-shadow: none; }
+      .xp-head small br { display: none; }
+      .xp-head small br + span::before { content: " · "; }
+      .roles li { padding: 4px 0; }
+      .xp-desc { font-size: 9pt; }
+      .xp-desc p { margin-bottom: 4px; }
+      .xp-desc li { margin: 1px 0; }
+      .xp-desc a { color: var(--accent); text-decoration: none; }
+      .roles li { padding: 5px 0; break-inside: avoid; }
+    }
   </style>
   <script>
     try { document.documentElement.dataset.theme = localStorage.getItem('miweb.theme') === 'dark' ? 'dark' : 'light'; }
@@ -241,7 +301,7 @@
 
     <div class="hero-inner">
       <div class="hero-top">
-        <div class="avatar" aria-hidden="true">JL</div>
+        <img class="avatar" src="img/yo.jpg" alt="José Luis Domínguez Rondán" width="96" height="96">
         <div>
           <h1>José Luis Domínguez Rondán</h1>
           <p class="role" data-i18n="role"></p>
@@ -255,6 +315,10 @@
         <span data-i18n-html="current" style="white-space:normal"></span><br>
         <span data-i18n="location"></span>
       </p>
+      <p class="print-only print-contact">
+        <a href="mailto:joseluis.dominguezrondan@gmail.com">joseluis.dominguezrondan@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/joseluisdominguezrondan/">linkedin.com/in/joseluisdominguezrondan</a>
+      </p>
       <div class="actions">
         <a class="btn" href="https://www.linkedin.com/in/joseluisdominguezrondan/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
@@ -263,6 +327,10 @@
         <a class="btn ghost" id="contact-btn" href="mailto:joseluis.dominguezrondan@gmail.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
           <span data-i18n="ctaContact"></span>
+        </a>
+        <a class="btn ghost" id="cv-btn" href="cv/CV-JoseLuisDominguezRondan-ES.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          <span data-i18n="cvDownload"></span>
         </a>
       </div>
     </div>
@@ -308,25 +376,6 @@
             <ul class="tags"><li>Python</li><li>R</li><li>Machine Learning</li><li data-i18n="dataAnalysis"></li></ul>
           </div>
         </div>
-
-        <h3 data-i18n="eduTitle"></h3>
-        <ul class="roles">
-          <li><span><strong data-i18n="deg1"></strong> · <span data-i18n="uca"></span></span><small>1997 – 2001</small></li>
-          <li><span><strong data-i18n="deg2"></strong> · <span data-i18n="eqf"></span></span><small>2022</small></li>
-          <li><span><span data-i18n="master"></span> · campusMVP</span><small>2024</small></li>
-        </ul>
-
-        <h3 data-i18n="langTitle"></h3>
-        <ul class="tags">
-          <li data-i18n="langEs"></li>
-          <li data-i18n="langEn"></li>
-        </ul>
-
-        <h3 data-i18n="certTitle"></h3>
-        <ul class="tags">
-          <li>Microsoft Certified: Azure AI Fundamentals</li>
-          <li>Microsoft Certified: Azure Fundamentals</li>
-        </ul>
       </section>
 
       <section class="card" id="experiencia" aria-labelledby="experiencia-title">
@@ -341,37 +390,49 @@
             <div class="xp-desc" data-i18n-html="xp2Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp3Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2020 – 2024<br><span data-i18n="partTime"></span></small></div>
+            <div class="xp-head"><span><strong data-i18n="xp3Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2018 – 2024<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp3Desc"></div>
-          </li>
-          <li>
-            <div class="xp-head"><span><strong data-i18n="xp4Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2018 – 2024<br><span data-i18n="partTime"></span></small></div>
-            <div class="xp-desc" data-i18n-html="xp4Desc"></div>
           </li>
           <li>
             <div class="xp-head"><span><strong data-i18n="xp5Role"></strong> <span class="xp-org">· Babyradio</span></span><small>2018 – 2021<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp5Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp6Role"></strong> <span class="xp-org">· Leapforce</span></span><small>2016 – 2018<br><span data-i18n="partTime"></span></small></div>
+            <div class="xp-head"><span><strong data-i18n="xp6Role"></strong> <span class="xp-org">· Lionbridge · Leapforce</span></span><small>2006 – 2018<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp6Desc"></div>
-          </li>
-          <li>
-            <div class="xp-head"><span><strong data-i18n="xp7Role"></strong> <span class="xp-org">· Lionbridge</span></span><small>2013 – 2016<br><span data-i18n="partTime"></span></small></div>
           </li>
           <li>
             <div class="xp-head"><span><strong data-i18n="xp8Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2012 – 2013<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp8Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp9Role"></strong> <span class="xp-org">· Lionbridge Technologies</span></span><small>2006 – 2010<br><span data-i18n="partTime"></span></small></div>
-            <div class="xp-desc" data-i18n-html="xp9Desc"></div>
-          </li>
-          <li>
             <div class="xp-head"><span><strong data-i18n="xp10Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2002 – 2006<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp10Desc"></div>
           </li>
         </ol>
+      </section>
+
+      <section class="card" id="formacion" aria-labelledby="formacion-title">
+        <h2><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></span><span id="formacion-title" data-i18n="eduCardTitle"></span></h2>
+
+        <h3 data-i18n="eduTitle"></h3>
+        <ul class="roles">
+          <li><span><strong data-i18n="deg1"></strong> · <span data-i18n="uca"></span></span><small>1997 – 2001</small></li>
+          <li><span><strong data-i18n="deg2"></strong> · <span data-i18n="eqf"></span></span><small>2022</small></li>
+          <li><span><span data-i18n="master"></span> · campusMVP</span><small>2024</small></li>
+        </ul>
+
+        <h3 data-i18n="certTitle"></h3>
+        <ul class="tags">
+          <li>Microsoft Certified: Azure AI Fundamentals</li>
+          <li>Microsoft Certified: Azure Fundamentals</li>
+        </ul>
+
+        <h3 data-i18n="langTitle"></h3>
+        <ul class="tags">
+          <li data-i18n="langEs"></li>
+          <li data-i18n="langEn"></li>
+        </ul>
       </section>
     </main>
 
@@ -384,9 +445,10 @@
       const I18N = {
         es: {
           role: 'Full Stack Developer · PHP/Laravel, .NET y JavaScript',
-          current: 'Analista de Proyectos de Software en <strong>El Puerto Global</strong> y Senior Developer en Backend en <strong>Bravent</strong>',
+          current: 'Analista de Proyectos de Software en <strong>El Puerto Global</strong> y Senior Backend Developer en <strong>Bravent</strong>',
           location: '📍 El Puerto de Santa María, Cádiz (España)',
           ctaContact: 'Contactar',
+          cvDownload: 'Descargar CV',
           mailSubject: 'Contacto desde tu web',
           aboutTitle: 'Sobre mí',
           aboutLead: 'Ingeniero de Software, Full Stack Developer con un Máster en Machine Learning y Ciencia de Datos.',
@@ -413,25 +475,21 @@
           xp1Desc: '<p>Desarrollador Senior Backend especializado en el diseño, mantenimiento y evolución de sistemas empresariales multi-tecnología, abarcando desde entornos Open Source hasta la suite corporativa de Microsoft.</p><p>Proyectos para clientes de los sectores industrial, de recursos humanos y hotelero.</p><p class="xp-label">Principales responsabilidades y stack</p><ul><li><strong>Desarrollo Backend (Stack LAMP):</strong> Diseño, arquitectura e implementación de servicios backend robustos utilizando Linux, Apache, MySQL y PHP. Optimización de rendimiento, bases de datos y desarrollo de APIs.</li><li><strong>Ecosistema Microsoft &amp; ERP:</strong> Desarrollo de extensiones a medida para Dynamics 365 Business Central utilizando el lenguaje AL. Mantenimiento, refactorización y actualización de código en aplicaciones legadas y modernas desarrolladas en .NET (C#).</li><li><strong>Inteligencia Artificial:</strong> Desarrollo del backend de avatares virtuales con IA.</li></ul>',
           xp2Role: 'Analista de Proyectos de Software',
           xp2Desc: '<p>Analista de Proyectos de Software con más de 25 años de experiencia en la conceptualización, desarrollo e implantación de soluciones tecnológicas para la administración local.</p><p>A lo largo de mi trayectoria he impulsado la transformación digital del ayuntamiento mediante el desarrollo de portales web de servicio a la ciudadanía y de herramientas internas de gestión, algunas de ellas, como Control de Presencia y Permisos Retribuidos o el Escritorio Corporativo Municipal, con más de 500 usuarios.</p><p class="xp-label">Responsabilidades y logros clave</p><ul><li><strong>Desarrollo de aplicaciones:</strong> análisis, diseño e implantación de más de 50 aplicaciones a medida sobre entornos LAMP y WISA, adaptando la arquitectura a los requisitos de cada proyecto.</li><li><strong>Dirección técnica de proyectos:</strong> liderazgo y desarrollo de portales institucionales y sistemas corporativos críticos, entre ellos:<ul><li><a href="https://www.elpuertodesantamaria.es" target="_blank" rel="noopener">Portales web municipales</a> y sus gestores de contenidos (CMS)</li><li>Asistente de inteligencia artificial del portal web municipal</li><li>Escritorio Corporativo Municipal</li><li>Control de Presencia y Permisos Retribuidos</li><li><a href="https://www.turismoelpuerto.com" target="_blank" rel="noopener">Portal de la Oficina de Turismo</a></li><li>Gestor de Aplicaciones Municipal</li><li>Aplicaciones de registro (entrada/salida, solicitudes, etc.)</li><li>Integración de soluciones de terceros en el ecosistema tecnológico municipal</li></ul></li><li><strong>Evolución y mantenimiento:</strong> actualización tecnológica y mantenimiento continuo de la plataforma digital del ayuntamiento, garantizando su disponibilidad y seguridad.</li></ul>',
-          xp3Role: 'Docente Externo',
-          xp3Desc: '<p>Profesor de HTML, CSS y RWD en el Máster Online de Marketing Digital y Social, y en diversos cursos para expertos.</p>',
-          xp4Role: 'Ponente',
-          xp4Desc: '<p>Ponente en el Máster en Dirección de Marketing Digital y Social, Marketing Socioambiental, en la asignatura “Estrategias de Marketing Digital en Organizaciones No Lucrativas”.</p>',
-          xp5Role: 'Responsable Departamento Informática',
+          xp3Role: 'Docente externo y ponente',
+          xp3Desc: '<p><strong>Docente externo (2020 – 2024):</strong> Profesor de HTML, CSS y RWD en el Máster Online de Marketing Digital y Social, y en diversos cursos para expertos.</p><p><strong>Ponente (2018 – 2024):</strong> Máster en Dirección de Marketing Digital y Social, Marketing Socioambiental, en la asignatura “Estrategias de Marketing Digital en Organizaciones No Lucrativas”.</p>',
+          xp5Role: 'Responsable del Departamento de Informática',
           xp5Desc: '<p>Fullstack Developer.<br>Responsable técnico y de sistemas informáticos.<br>Desarrollador de aplicaciones y sitios web.<br>Desarrollador de plataformas de streaming.<br>Desarrollador de Skills Babyradio para el sistema Alexa de Amazon.</p>',
-          xp6Role: 'Internet Assessor',
-          xp6Desc: '<p>Trabajando para Google a través de esta empresa en el proyecto “Rating Program” como evaluador de resultados del motor de búsquedas de Google y Google Maps.</p>',
-          xp7Role: 'Internet Assessor',
+          xp6Role: 'Evaluador de resultados de búsqueda',
+          xp6Desc: '<p>Evaluación de resultados del buscador de Google y de Google Maps en el proyecto “Rating Program” de Google, a través de Lionbridge (2006 – 2010 y 2013 – 2016) y Leapforce (2016 – 2018).</p>',
           xp8Role: 'Desarrollador de Software',
           xp8Desc: '<p>Desarrollo de una aplicación de gestión remota de presupuestos con geolocalización de clientes y gestión de hoja de ruta integrada con Google Maps.</p>',
-          xp9Role: 'Result Rater',
-          xp9Desc: '<p>Trabajando para Google a través de esta empresa en el proyecto “Rating Program” como evaluador de resultados de consultas de Google para ayudar al buscador a dar resultados coherentes según el perfil del usuario.</p>',
           xp10Role: 'Desarrollador de Software',
           xp10Desc: '<p>Encargado del mantenimiento de los equipos informáticos y desarrollador de la aplicación de Gestión Integral de Presupuestos, Clientes, Pedidos, Facturación y Almacén.</p>',
           certTitle: 'Certificaciones',
           deg1: 'Ingeniero Técnico en Informática de Gestión',
           deg2: 'Grado en Informática',
           eduTitle: 'Formación',
+          eduCardTitle: 'Formación e idiomas',
           uca: 'Universidad de Cádiz',
           eqf: 'MECES · nivel 6 EQF',
           master: 'Máster en Machine Learning y Ciencia de Datos con Python y R',
@@ -443,6 +501,7 @@
           current: 'Software Project Analyst at <strong>El Puerto Global</strong> and Senior Backend Developer at <strong>Bravent</strong>',
           location: '📍 El Puerto de Santa María, Cádiz (Spain)',
           ctaContact: 'Contact me',
+          cvDownload: 'Download CV',
           mailSubject: 'Contact from your website',
           aboutTitle: 'About me',
           aboutLead: 'Software Engineer, Full Stack Developer with a Master’s in Machine Learning and Data Science.',
@@ -469,25 +528,21 @@
           xp1Desc: '<p>Senior Backend Developer specialized in the design, maintenance and evolution of multi-technology enterprise systems, ranging from Open Source environments to the Microsoft corporate suite.</p><p>Projects for clients in the industrial, human resources and hospitality sectors.</p><p class="xp-label">Main responsibilities and stack</p><ul><li><strong>Backend Development (LAMP Stack):</strong> Design, architecture and implementation of robust backend services using Linux, Apache, MySQL and PHP. Performance and database optimization and API development.</li><li><strong>Microsoft Ecosystem &amp; ERP:</strong> Development of custom extensions for Dynamics 365 Business Central using the AL language. Maintenance, refactoring and updating of code in legacy and modern applications built with .NET (C#).</li><li><strong>Artificial Intelligence:</strong> Backend development for AI-powered virtual avatars.</li></ul>',
           xp2Role: 'Software Project Analyst',
           xp2Desc: '<p>Software Project Analyst with more than 25 years of experience in the conception, development and implementation of technology solutions for local government.</p><p>Throughout my career I have driven the City Council’s digital transformation by developing citizen-facing web portals and internal management tools, some of them, such as Time &amp; Attendance and Paid Leave or the Municipal Corporate Desktop, with more than 500 users.</p><p class="xp-label">Key responsibilities and achievements</p><ul><li><strong>Application development:</strong> analysis, design and implementation of more than 50 custom applications on LAMP and WISA environments, adapting the architecture to the requirements of each project.</li><li><strong>Technical project leadership:</strong> leading and developing institutional portals and critical corporate systems, including:<ul><li><a href="https://www.elpuertodesantamaria.es" target="_blank" rel="noopener">Municipal websites</a> and their content management systems (CMS)</li><li>AI assistant for the municipal website</li><li>Municipal Corporate Desktop</li><li>Time &amp; Attendance and Paid Leave management</li><li><a href="https://www.turismoelpuerto.com" target="_blank" rel="noopener">Tourist Office portal</a></li><li>Municipal Application Manager</li><li>Registry applications (incoming/outgoing records, requests, etc.)</li><li>Integration of third-party solutions into the municipal technology ecosystem</li></ul></li><li><strong>Evolution and maintenance:</strong> technology upgrades and ongoing maintenance of the City Council’s digital platform, ensuring its availability and security.</li></ul>',
-          xp3Role: 'External Lecturer',
-          xp3Desc: '<p>Lecturer of HTML, CSS and RWD in the Online Master’s in Digital and Social Marketing, and in several expert courses.</p>',
-          xp4Role: 'Speaker',
-          xp4Desc: '<p>Speaker in the Master’s in Digital and Social Marketing Management, Socio-environmental Marketing, in the course “Digital Marketing Strategies in Non-Profit Organizations”.</p>',
+          xp3Role: 'External Lecturer and Speaker',
+          xp3Desc: '<p><strong>External Lecturer (2020 – 2024):</strong> Lecturer of HTML, CSS and RWD in the Online Master’s in Digital and Social Marketing, and in several expert courses.</p><p><strong>Speaker (2018 – 2024):</strong> Master’s in Digital and Social Marketing Management, Socio-environmental Marketing, in the course “Digital Marketing Strategies in Non-Profit Organizations”.</p>',
           xp5Role: 'Head of IT Department',
           xp5Desc: '<p>Fullstack Developer.<br>Technical and IT systems lead.<br>Application and website developer.<br>Streaming platform developer.<br>Developer of Babyradio Skills for the Amazon Alexa system.</p>',
-          xp6Role: 'Internet Assessor',
-          xp6Desc: '<p>Working for Google through this company on the “Rating Program” project, evaluating results from the Google search engine and Google Maps.</p>',
-          xp7Role: 'Internet Assessor',
+          xp6Role: 'Search Results Evaluator',
+          xp6Desc: '<p>Evaluation of Google Search and Google Maps results for Google’s “Rating Program”, through Lionbridge (2006 – 2010 and 2013 – 2016) and Leapforce (2016 – 2018).</p>',
           xp8Role: 'Software Developer',
           xp8Desc: '<p>Development of a remote quote management application with customer geolocation and route sheet management integrated with Google Maps.</p>',
-          xp9Role: 'Result Rater',
-          xp9Desc: '<p>Working for Google through this company on the “Rating Program” project, evaluating Google query results to help the search engine return results consistent with the user’s profile.</p>',
           xp10Role: 'Software Developer',
           xp10Desc: '<p>In charge of maintaining the company’s computer equipment and developer of the Integrated Management application for Quotes, Customers, Orders, Invoicing and Warehouse.</p>',
           certTitle: 'Certifications',
           deg1: 'Technical Engineer in Computer Science (Management Information Systems)',
           deg2: 'Bachelor’s Degree in Computer Science',
           eduTitle: 'Education',
+          eduCardTitle: 'Education & languages',
           uca: 'University of Cádiz',
           eqf: 'MECES · EQF level 6',
           master: 'Master’s in Machine Learning and Data Science with Python and R',
@@ -500,6 +555,8 @@
       let lang = 'es';
       try { lang = localStorage.getItem(LANG_KEY) || ''; } catch (e) { lang = ''; }
       if (!I18N[lang]) lang = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+      const qsLang = new URLSearchParams(location.search).get('lang');
+      if (I18N[qsLang]) lang = qsLang;
       const t = k => I18N[lang][k];
 
       function applyLang() {
@@ -509,6 +566,7 @@
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
         document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
         document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+        document.getElementById('cv-btn').href = 'cv/CV-JoseLuisDominguezRondan-' + lang.toUpperCase() + '.pdf';
         document.getElementById('contact-btn').href =
           'mailto:joseluis.dominguezrondan@gmail.com?subject=' + encodeURIComponent(t('mailSubject'));
         applyTheme();
