@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>José Luis Domínguez Rondán</title>
-  <meta name="description" content="José Luis Domínguez Rondán — Full Stack Developer · Machine Learning & Data Science.">
+  <meta name="description" content="José Luis Domínguez Rondán — Full Stack Developer (PHP/Laravel, .NET, JavaScript) con formación en Machine Learning y Ciencia de Datos.">
   <style>
     :root {
       --bg: #f7f8fa;
@@ -156,6 +156,9 @@
     }
     .stat span { font-size: 13px; color: var(--muted); }
 
+    .tech-groups { display: grid; gap: 10px; }
+    .tech-group { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: start; }
+    .tech-label { font-size: 14px; font-weight: 600; padding-top: 5px; }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
     .tags li { padding: 5px 11px; border-radius: 999px; border: 1px solid var(--border); font-size: 14px; transition: transform .15s ease; }
     .tags li:hover { transform: translateY(-2px); }
@@ -174,7 +177,7 @@
     .xp > li { position: relative; padding: 12px 0 12px 20px; border-left: 2px solid var(--border); }
     .xp > li::before { content: ""; position: absolute; left: -6px; top: 19px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--surface); }
     .xp-head { display: flex; justify-content: space-between; gap: 12px; }
-    .xp-head small { color: var(--muted); white-space: nowrap; }
+    .xp-head small { color: var(--muted); white-space: nowrap; text-align: right; }
     .xp-org { color: var(--muted); }
     .xp-desc { margin-top: 4px; color: var(--muted); font-size: 15px; }
     .xp-desc p { margin: 0 0 6px; }
@@ -194,6 +197,9 @@
       .stats { gap: 8px; }
       .stat strong { font-size: 20px; }
       .roles li, .xp-head { flex-direction: column; gap: 0; }
+      .xp-head small { text-align: left; }
+      .tech-group { grid-template-columns: 1fr; gap: 6px; }
+      .tech-label { padding-top: 0; }
     }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
   </style>
@@ -276,27 +282,38 @@
           <li data-i18n-html="aboutPublic"></li>
           <li data-i18n-html="aboutPrivate"></li>
         </ul>
-        <p><strong data-i18n="aboutClose"></strong></p>
 
         <div class="stats">
           <div class="stat"><strong>25+</strong><span data-i18n="stat1"></span></div>
-          <div class="stat"><strong>60+</strong><span data-i18n="stat2"></span></div>
-          <div class="stat"><strong>ML</strong><span data-i18n="stat3"></span></div>
+          <div class="stat"><strong>50+</strong><span data-i18n="stat2"></span></div>
+          <div class="stat"><strong>500+</strong><span data-i18n="stat3"></span></div>
         </div>
 
         <h3 data-i18n="techTitle"></h3>
-        <ul class="tags">
-          <li>Python</li><li>R</li><li>Machine Learning</li><li>PHP</li><li>MySQL</li>
-          <li>LAMP · WISA</li><li data-i18n="dataAnalysis"></li><li>.NET · C#</li><li>Microsoft Azure</li>
-          <li>Dynamics 365 BC (AL)</li><li>SPA · PWA</li><li>Responsive Design</li>
-        </ul>
+        <div class="tech-groups">
+          <div class="tech-group">
+            <span class="tech-label" data-i18n="tgBack"></span>
+            <ul class="tags"><li>PHP</li><li>Laravel</li><li>.NET · C#</li><li>MySQL</li><li>LAMP · WISA</li></ul>
+          </div>
+          <div class="tech-group">
+            <span class="tech-label" data-i18n="tgFront"></span>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Bootstrap</li><li>Responsive Design</li><li>SPA</li><li>PWA</li></ul>
+          </div>
+          <div class="tech-group">
+            <span class="tech-label" data-i18n="tgCloud"></span>
+            <ul class="tags"><li>Microsoft Azure</li><li>Dynamics 365 BC (AL)</li></ul>
+          </div>
+          <div class="tech-group">
+            <span class="tech-label" data-i18n="tgData"></span>
+            <ul class="tags"><li>Python</li><li>R</li><li>Machine Learning</li><li data-i18n="dataAnalysis"></li></ul>
+          </div>
+        </div>
 
         <h3 data-i18n="eduTitle"></h3>
         <ul class="roles">
           <li><span><strong data-i18n="deg1"></strong> · <span data-i18n="uca"></span></span><small>1997 – 2001</small></li>
           <li><span><strong data-i18n="deg2"></strong> · <span data-i18n="eqf"></span></span><small>2022</small></li>
           <li><span><span data-i18n="master"></span> · campusMVP</span><small>2024</small></li>
-          <li><span><span data-i18n="degSys"></span> · <span data-i18n="uma"></span></span><small>1995 – 1996</small></li>
         </ul>
 
         <h3 data-i18n="langTitle"></h3>
@@ -316,42 +333,42 @@
         <h2><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg></span><span id="experiencia-title" data-i18n="xpTitle"></span></h2>
         <ol class="xp">
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp1Role"></strong> <span class="xp-org">· Bravent</span></span><small>2021 – <span data-i18n="present"></span></small></div>
+            <div class="xp-head"><span><strong data-i18n="xp1Role"></strong> <span class="xp-org">· Bravent</span></span><small>2021 – <span data-i18n="present"></span><br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp1Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp2Role"></strong> <span class="xp-org">· El Puerto de Santa María Global</span></span><small>2001 – <span data-i18n="present"></span></small></div>
+            <div class="xp-head"><span><strong data-i18n="xp2Role"></strong> <span class="xp-org">· El Puerto de Santa María Global</span></span><small>2001 – <span data-i18n="present"></span><br><span data-i18n="fullTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp2Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp3Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2020 – 2024</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp3Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2020 – 2024<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp3Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp4Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2018 – 2024</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp4Role"></strong> <span class="xp-org">· Universidad de Cádiz</span></span><small>2018 – 2024<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp4Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp5Role"></strong> <span class="xp-org">· Babyradio</span></span><small>2018 – 2021</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp5Role"></strong> <span class="xp-org">· Babyradio</span></span><small>2018 – 2021<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp5Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp6Role"></strong> <span class="xp-org">· Leapforce</span></span><small>2016 – 2018</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp6Role"></strong> <span class="xp-org">· Leapforce</span></span><small>2016 – 2018<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp6Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp7Role"></strong> <span class="xp-org">· Lionbridge</span></span><small>2013 – 2016</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp7Role"></strong> <span class="xp-org">· Lionbridge</span></span><small>2013 – 2016<br><span data-i18n="partTime"></span></small></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp8Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2012 – 2013</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp8Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2012 – 2013<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp8Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp9Role"></strong> <span class="xp-org">· Lionbridge Technologies</span></span><small>2006 – 2010</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp9Role"></strong> <span class="xp-org">· Lionbridge Technologies</span></span><small>2006 – 2010<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp9Desc"></div>
           </li>
           <li>
-            <div class="xp-head"><span><strong data-i18n="xp10Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2002 – 2006</small></div>
+            <div class="xp-head"><span><strong data-i18n="xp10Role"></strong> <span class="xp-org">· Moneleg, S.L.</span></span><small>2002 – 2006<br><span data-i18n="partTime"></span></small></div>
             <div class="xp-desc" data-i18n-html="xp10Desc"></div>
           </li>
         </ol>
@@ -366,8 +383,8 @@
       /* ---------- Traducciones ---------- */
       const I18N = {
         es: {
-          role: 'Full Stack Developer · Machine Learning y Ciencia de Datos',
-          current: 'Analista de Proyectos de Software en <strong>El Puerto Global</strong> y Senior Developer en <strong>Bravent</strong>',
+          role: 'Full Stack Developer · PHP/Laravel, .NET y JavaScript',
+          current: 'Analista de Proyectos de Software en <strong>El Puerto Global</strong> y Senior Developer en Backend en <strong>Bravent</strong>',
           location: '📍 El Puerto de Santa María, Cádiz (España)',
           ctaContact: 'Contactar',
           mailSubject: 'Contacto desde tu web',
@@ -376,29 +393,32 @@
           aboutP1: 'Construyo productos escalables, seguros y con inteligencia integrada: desde la base de datos hasta el modelo de IA y la interfaz.',
           aboutPublic: '<strong>Sector público:</strong> más de 50 aplicaciones desarrolladas para la administración pública.',
           aboutPrivate: '<strong>Sector privado:</strong> plataformas de streaming, sistemas de gestión hotelera y asistentes de inteligencia artificial, entre otros proyectos.',
-          aboutClose: 'Un apasionado de mi trabajo.',
           stat1: 'años desarrollando',
           stat2: 'apps para el sector público',
-          stat3: 'Máster en Ciencia de Datos',
+          stat3: 'usuarios en Control de Presencia y Escritorio Corporativo',
           techTitle: 'Tecnologías',
           dataAnalysis: 'Análisis de datos',
-          degSys: 'Ingeniería Técnica en Informática de Sistemas',
-          uma: 'Universidad de Málaga',
+          tgBack: 'Backend',
+          tgFront: 'Frontend',
+          tgCloud: 'Cloud y ERP',
+          tgData: 'Datos e IA',
           langTitle: 'Idiomas',
           langEs: 'Español · nativo',
           langEn: 'Inglés · competencia profesional completa',
           xpTitle: 'Experiencia',
           present: 'actualidad',
-          xp1Role: 'Senior developer',
-          xp1Desc: '<p>Desarrollador Senior Backend especializado en el diseño, mantenimiento y evolución de sistemas empresariales multi-tecnología, abarcando desde entornos Open Source hasta la suite corporativa de Microsoft.</p><p class="xp-label">Principales responsabilidades y stack</p><ul><li><strong>Desarrollo Backend (Stack LAMP):</strong> Diseño, arquitectura e implementación de servicios backend robustos utilizando Linux, Apache, MySQL y PHP. Optimización de rendimiento, bases de datos y desarrollo de APIs.</li><li><strong>Ecosistema Microsoft &amp; ERP:</strong> Desarrollo de extensiones a medida para Dynamics 365 Business Central utilizando el lenguaje AL. Mantenimiento, refactorización y actualización de código en aplicaciones legadas y modernas desarrolladas en .NET (C#).</li></ul>',
+          fullTime: 'Jornada completa',
+          partTime: 'Media jornada',
+          xp1Role: 'Senior Developer en Backend',
+          xp1Desc: '<p>Desarrollador Senior Backend especializado en el diseño, mantenimiento y evolución de sistemas empresariales multi-tecnología, abarcando desde entornos Open Source hasta la suite corporativa de Microsoft.</p><p>Proyectos para clientes de los sectores industrial, de recursos humanos y hotelero.</p><p class="xp-label">Principales responsabilidades y stack</p><ul><li><strong>Desarrollo Backend (Stack LAMP):</strong> Diseño, arquitectura e implementación de servicios backend robustos utilizando Linux, Apache, MySQL y PHP. Optimización de rendimiento, bases de datos y desarrollo de APIs.</li><li><strong>Ecosistema Microsoft &amp; ERP:</strong> Desarrollo de extensiones a medida para Dynamics 365 Business Central utilizando el lenguaje AL. Mantenimiento, refactorización y actualización de código en aplicaciones legadas y modernas desarrolladas en .NET (C#).</li><li><strong>Inteligencia Artificial:</strong> Desarrollo del backend de avatares virtuales con IA.</li></ul>',
           xp2Role: 'Analista de Proyectos de Software',
-          xp2Desc: '<p>Analista de Proyectos de Software con más de 25 años de experiencia en la conceptualización, desarrollo e implantación de soluciones tecnológicas para la administración local.</p><p>A lo largo de mi trayectoria he impulsado la transformación digital del ayuntamiento mediante el desarrollo de portales web de servicio a la ciudadanía y de herramientas internas de gestión, algunas de ellas con más de 500 usuarios.</p><p class="xp-label">Responsabilidades y logros clave</p><ul><li><strong>Desarrollo de aplicaciones:</strong> análisis, diseño e implantación de más de 60 aplicaciones a medida sobre entornos LAMP y WISA, adaptando la arquitectura a los requisitos de cada proyecto.</li><li><strong>Dirección técnica de proyectos:</strong> liderazgo y desarrollo de portales institucionales y sistemas corporativos críticos, entre ellos:<ul><li>Portales web municipales y sus gestores de contenidos (CMS)</li><li>Escritorio Corporativo Municipal</li><li>Control de Presencia y Permisos Retribuidos</li><li>Portal de la Oficina de Turismo</li><li>Gestor de Aplicaciones Municipal</li><li>Aplicaciones de registro (entrada/salida, solicitudes, etc.)</li><li>Integración de soluciones de terceros en el ecosistema tecnológico municipal</li></ul></li><li><strong>Evolución y mantenimiento:</strong> actualización tecnológica y mantenimiento continuo de la plataforma digital del ayuntamiento, garantizando su disponibilidad y seguridad.</li></ul>',
+          xp2Desc: '<p>Analista de Proyectos de Software con más de 25 años de experiencia en la conceptualización, desarrollo e implantación de soluciones tecnológicas para la administración local.</p><p>A lo largo de mi trayectoria he impulsado la transformación digital del ayuntamiento mediante el desarrollo de portales web de servicio a la ciudadanía y de herramientas internas de gestión, algunas de ellas, como Control de Presencia y Permisos Retribuidos o el Escritorio Corporativo Municipal, con más de 500 usuarios.</p><p class="xp-label">Responsabilidades y logros clave</p><ul><li><strong>Desarrollo de aplicaciones:</strong> análisis, diseño e implantación de más de 50 aplicaciones a medida sobre entornos LAMP y WISA, adaptando la arquitectura a los requisitos de cada proyecto.</li><li><strong>Dirección técnica de proyectos:</strong> liderazgo y desarrollo de portales institucionales y sistemas corporativos críticos, entre ellos:<ul><li><a href="https://www.elpuertodesantamaria.es" target="_blank" rel="noopener">Portales web municipales</a> y sus gestores de contenidos (CMS)</li><li>Asistente de inteligencia artificial del portal web municipal</li><li>Escritorio Corporativo Municipal</li><li>Control de Presencia y Permisos Retribuidos</li><li><a href="https://www.turismoelpuerto.com" target="_blank" rel="noopener">Portal de la Oficina de Turismo</a></li><li>Gestor de Aplicaciones Municipal</li><li>Aplicaciones de registro (entrada/salida, solicitudes, etc.)</li><li>Integración de soluciones de terceros en el ecosistema tecnológico municipal</li></ul></li><li><strong>Evolución y mantenimiento:</strong> actualización tecnológica y mantenimiento continuo de la plataforma digital del ayuntamiento, garantizando su disponibilidad y seguridad.</li></ul>',
           xp3Role: 'Docente Externo',
           xp3Desc: '<p>Profesor de HTML, CSS y RWD en el Máster Online de Marketing Digital y Social, y en diversos cursos para expertos.</p>',
           xp4Role: 'Ponente',
           xp4Desc: '<p>Ponente en el Máster en Dirección de Marketing Digital y Social, Marketing Socioambiental, en la asignatura “Estrategias de Marketing Digital en Organizaciones No Lucrativas”.</p>',
           xp5Role: 'Responsable Departamento Informática',
-          xp5Desc: '<p>Fullstack Developer.<br>Responsable técnico y de sistemas informáticos.<br>Desarrollador de aplicaciones y sitios web.<br>Desarrollador de Skills Babyradio para Amazon’s Alexa.</p>',
+          xp5Desc: '<p>Fullstack Developer.<br>Responsable técnico y de sistemas informáticos.<br>Desarrollador de aplicaciones y sitios web.<br>Desarrollador de plataformas de streaming.<br>Desarrollador de Skills Babyradio para el sistema Alexa de Amazon.</p>',
           xp6Role: 'Internet Assessor',
           xp6Desc: '<p>Trabajando para Google a través de esta empresa en el proyecto “Rating Program” como evaluador de resultados del motor de búsquedas de Google y Google Maps.</p>',
           xp7Role: 'Internet Assessor',
@@ -419,8 +439,8 @@
           toLight: 'Cambiar a modo claro'
         },
         en: {
-          role: 'Full Stack Developer · Machine Learning & Data Science',
-          current: 'Software Project Analyst at <strong>El Puerto Global</strong> and Senior Developer at <strong>Bravent</strong>',
+          role: 'Full Stack Developer · PHP/Laravel, .NET & JavaScript',
+          current: 'Software Project Analyst at <strong>El Puerto Global</strong> and Senior Backend Developer at <strong>Bravent</strong>',
           location: '📍 El Puerto de Santa María, Cádiz (Spain)',
           ctaContact: 'Contact me',
           mailSubject: 'Contact from your website',
@@ -429,29 +449,32 @@
           aboutP1: 'I build scalable, secure products with built-in intelligence: from the database to the AI model and the interface.',
           aboutPublic: '<strong>Public sector:</strong> more than 50 applications developed for public administration.',
           aboutPrivate: '<strong>Private sector:</strong> streaming platforms, hotel management systems and AI assistants, among other projects.',
-          aboutClose: 'Passionate about what I do.',
           stat1: 'years building software',
           stat2: 'public sector apps',
-          stat3: 'Master’s in Data Science',
+          stat3: 'users on Time & Attendance and Corporate Desktop',
           techTitle: 'Technologies',
           dataAnalysis: 'Data analysis',
-          degSys: 'Technical Engineering in Computer Systems',
-          uma: 'University of Málaga',
+          tgBack: 'Backend',
+          tgFront: 'Frontend',
+          tgCloud: 'Cloud & ERP',
+          tgData: 'Data & AI',
           langTitle: 'Languages',
           langEs: 'Spanish · native',
           langEn: 'English · full professional proficiency',
           xpTitle: 'Experience',
           present: 'present',
-          xp1Role: 'Senior Developer',
-          xp1Desc: '<p>Senior Backend Developer specialized in the design, maintenance and evolution of multi-technology enterprise systems, ranging from Open Source environments to the Microsoft corporate suite.</p><p class="xp-label">Main responsibilities and stack</p><ul><li><strong>Backend Development (LAMP Stack):</strong> Design, architecture and implementation of robust backend services using Linux, Apache, MySQL and PHP. Performance and database optimization and API development.</li><li><strong>Microsoft Ecosystem &amp; ERP:</strong> Development of custom extensions for Dynamics 365 Business Central using the AL language. Maintenance, refactoring and updating of code in legacy and modern applications built with .NET (C#).</li></ul>',
+          fullTime: 'Full-time',
+          partTime: 'Part-time',
+          xp1Role: 'Senior Backend Developer',
+          xp1Desc: '<p>Senior Backend Developer specialized in the design, maintenance and evolution of multi-technology enterprise systems, ranging from Open Source environments to the Microsoft corporate suite.</p><p>Projects for clients in the industrial, human resources and hospitality sectors.</p><p class="xp-label">Main responsibilities and stack</p><ul><li><strong>Backend Development (LAMP Stack):</strong> Design, architecture and implementation of robust backend services using Linux, Apache, MySQL and PHP. Performance and database optimization and API development.</li><li><strong>Microsoft Ecosystem &amp; ERP:</strong> Development of custom extensions for Dynamics 365 Business Central using the AL language. Maintenance, refactoring and updating of code in legacy and modern applications built with .NET (C#).</li><li><strong>Artificial Intelligence:</strong> Backend development for AI-powered virtual avatars.</li></ul>',
           xp2Role: 'Software Project Analyst',
-          xp2Desc: '<p>Software Project Analyst with more than 25 years of experience in the conception, development and implementation of technology solutions for local government.</p><p>Throughout my career I have driven the City Council’s digital transformation by developing citizen-facing web portals and internal management tools, some of them with more than 500 users.</p><p class="xp-label">Key responsibilities and achievements</p><ul><li><strong>Application development:</strong> analysis, design and implementation of more than 60 custom applications on LAMP and WISA environments, adapting the architecture to the requirements of each project.</li><li><strong>Technical project leadership:</strong> leading and developing institutional portals and critical corporate systems, including:<ul><li>Municipal websites and their content management systems (CMS)</li><li>Municipal Corporate Desktop</li><li>Time &amp; Attendance and Paid Leave management</li><li>Tourist Office portal</li><li>Municipal Application Manager</li><li>Registry applications (incoming/outgoing records, requests, etc.)</li><li>Integration of third-party solutions into the municipal technology ecosystem</li></ul></li><li><strong>Evolution and maintenance:</strong> technology upgrades and ongoing maintenance of the City Council’s digital platform, ensuring its availability and security.</li></ul>',
+          xp2Desc: '<p>Software Project Analyst with more than 25 years of experience in the conception, development and implementation of technology solutions for local government.</p><p>Throughout my career I have driven the City Council’s digital transformation by developing citizen-facing web portals and internal management tools, some of them, such as Time &amp; Attendance and Paid Leave or the Municipal Corporate Desktop, with more than 500 users.</p><p class="xp-label">Key responsibilities and achievements</p><ul><li><strong>Application development:</strong> analysis, design and implementation of more than 50 custom applications on LAMP and WISA environments, adapting the architecture to the requirements of each project.</li><li><strong>Technical project leadership:</strong> leading and developing institutional portals and critical corporate systems, including:<ul><li><a href="https://www.elpuertodesantamaria.es" target="_blank" rel="noopener">Municipal websites</a> and their content management systems (CMS)</li><li>AI assistant for the municipal website</li><li>Municipal Corporate Desktop</li><li>Time &amp; Attendance and Paid Leave management</li><li><a href="https://www.turismoelpuerto.com" target="_blank" rel="noopener">Tourist Office portal</a></li><li>Municipal Application Manager</li><li>Registry applications (incoming/outgoing records, requests, etc.)</li><li>Integration of third-party solutions into the municipal technology ecosystem</li></ul></li><li><strong>Evolution and maintenance:</strong> technology upgrades and ongoing maintenance of the City Council’s digital platform, ensuring its availability and security.</li></ul>',
           xp3Role: 'External Lecturer',
           xp3Desc: '<p>Lecturer of HTML, CSS and RWD in the Online Master’s in Digital and Social Marketing, and in several expert courses.</p>',
           xp4Role: 'Speaker',
           xp4Desc: '<p>Speaker in the Master’s in Digital and Social Marketing Management, Socio-environmental Marketing, in the course “Digital Marketing Strategies in Non-Profit Organizations”.</p>',
           xp5Role: 'Head of IT Department',
-          xp5Desc: '<p>Fullstack Developer.<br>Technical and IT systems lead.<br>Application and website developer.<br>Developer of Babyradio Skills for Amazon’s Alexa.</p>',
+          xp5Desc: '<p>Fullstack Developer.<br>Technical and IT systems lead.<br>Application and website developer.<br>Streaming platform developer.<br>Developer of Babyradio Skills for the Amazon Alexa system.</p>',
           xp6Role: 'Internet Assessor',
           xp6Desc: '<p>Working for Google through this company on the “Rating Program” project, evaluating results from the Google search engine and Google Maps.</p>',
           xp7Role: 'Internet Assessor',
